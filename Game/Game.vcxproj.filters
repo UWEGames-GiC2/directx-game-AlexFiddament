@@ -156,6 +156,12 @@
     <ClInclude Include="GPGO.h">
       <Filter>GameObjects\3D\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="firstpersoncam.h">
+      <Filter>GameObjects\3D\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>GameObjects\3D\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -225,6 +231,9 @@
       <Filter>GameObjects\Sound\Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GPGO.cpp">
+      <Filter>GameObjects\3D\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="firstpersoncam.cpp">
       <Filter>GameObjects\3D\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
