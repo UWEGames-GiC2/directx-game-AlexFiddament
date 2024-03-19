@@ -1,19 +1,19 @@
 #pragma once
 class firstpersoncam
 {
-#ifndef _TPS_CAMERA_
-#define _TPS_CAMERA_
+#ifndef _FP_CAMERA_
+#define _FP_CAMERA_
 #include "camera.h"
 
 	//=================================================================
 	//TPS style camera which will follow a given GameObject around _target
 	//=================================================================
 
-	class TPSCamera : public Camera
+	class FPCamera : public Camera
 	{
 	public:
-		TPSCamera(float _fieldOfView, float _aspectRatio, float _nearPlaneDistance, float _farPlaneDistance, GameObject* _target, Vector3 _up, Vector3 _dpos);
-		virtual ~TPSCamera();
+		FPCamera(float _fieldOfView, float _aspectRatio, float _nearPlaneDistance, float _farPlaneDistance, GameObject* _target, Vector3 _up, Vector3 _dpos);
+		virtual ~FPCamera();
 
 		virtual void Tick(GameData* _GD) override;
 
