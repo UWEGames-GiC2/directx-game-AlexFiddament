@@ -9,10 +9,10 @@ FPCamera::FPCamera(float _fieldOfView, float _aspectRatio, float _nearPlaneDista
 	m_dpos = _dpos;
 }
 
-FPCamera::~FPCamera()b
+FPCamera::~FPCamera()
 {
 
-}bb
+}
 
 void FPCamera::Tick(GameData* _GD)
 {
