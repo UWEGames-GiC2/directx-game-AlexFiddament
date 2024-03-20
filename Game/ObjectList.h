@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "Light.h"
 #include "GPGO.h"
+#include "firstpersoncam.h"
 
 //VBGO examples
 #include "fileVBGO.h"

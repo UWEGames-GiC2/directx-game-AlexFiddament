@@ -23,6 +23,7 @@ class GameObject;
 class GameObject2D;
 class Camera;
 class TPSCamera;
+class firstpersoncam;
 class Light;
 class Sound;
 
@@ -94,6 +95,7 @@ private:
     //Basic 3D renderers
     Camera* m_cam = NULL; //principle camera
     TPSCamera* m_TPScam = NULL;//TPS cam
+    firstpersoncam* m_firstpersoncam = NULL;
     Light* m_light = NULL; //base light
 
     //required for the CMO model rendering system
