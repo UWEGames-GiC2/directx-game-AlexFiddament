@@ -54,13 +54,22 @@ void Player::Tick(GameData* _GD)
 
 	//change orinetation of player
 	float rotSpeed = 2.0f * _GD->m_dt;
-	if (_GD->m_KBS.A)
+
+	m_yaw -= rotSpeed * _GD->m_MS.x;
+
+	m_pitch -= rotSpeed * _GD->m_MS.y;
+	if (m_pitch > XMConvertToRadians(60)) m_pitch = XMConvertToRadians(60);
+	if (m_pitch < XMConvertToRadians(-60)) m_pitch = XMConvertToRadians(-60);
+	
+
+
+	;//if (_GD->m_KBS.A)
 	{
-		m_yaw += rotSpeed;
+		//m_yaw += rotSpeed;
 	}
-	if (_GD->m_KBS.D)
+	//if (_GD->m_KBS.D)
 	{
-		m_yaw -= rotSpeed;
+		//m_yaw -= rotSpeed;
 	}
 
 	//move player up and down
