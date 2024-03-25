@@ -14,9 +14,13 @@ public:
 
 	virtual void Tick(GameData* _GD) override;
 
+	float m_camYaw;
+	float m_camPitch;
+
 protected:
 	GameObject* m_targetObject; //I'm following this object
 	Vector3	m_dpos; //I'll lurk this far behind and away from it
+	
 };
 
 #endif
