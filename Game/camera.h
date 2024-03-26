@@ -29,6 +29,7 @@ protected:
 	//Principle transforms/matrices for this camera
 	Matrix m_projMat;
 	Matrix m_viewMat;
+	Matrix m_view;
 
 	//parameters for setting up a camera
 	float m_fieldOfView;

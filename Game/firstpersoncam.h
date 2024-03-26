@@ -16,7 +16,8 @@ public:
 
 	float m_camYaw;
 	float m_camPitch;
-
+	Matrix camrotatey;
+	Matrix camrotatex;
 protected:
 	GameObject* m_targetObject; //I'm following this object
 	Vector3	m_dpos; //I'll lurk this far behind and away from it

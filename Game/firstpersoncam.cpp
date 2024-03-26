@@ -21,24 +21,33 @@ void firstpersoncam::Tick(GameData* _GD)
 {
 	
 	//Set up position of camera and target position of camera based on new position and orientation of target object
-	if (_GD->m_GS == GS_PLAY_TPS_CAM)
-	{
-		float speed = 0.001f;
+	
+	
+		float speed = 0.0007f;
 		m_camYaw += sin(speed * _GD->m_MS.x) * m_dpos.z;
 		m_camPitch += sin(speed * _GD->m_MS.y) * m_dpos.z;
 
 		if (m_camPitch > XMConvertToRadians(60)) m_camPitch = XMConvertToRadians(60);
 		if (m_camPitch < XMConvertToRadians(-60)) m_camPitch = XMConvertToRadians(-60);
 		
+	
 
-	}
+	camrotatey = Matrix::CreateRotationX(-m_camPitch);
+	camrotatex = Matrix::CreateRotationY(m_camYaw);
 
-	Matrix rotCam = Matrix::CreateFromYawPitchRoll(m_camYaw, m_camPitch, 0.0f);
+	Matrix rotation = camrotatey * camrotatex;
 
+	Vector3 forwardDirection = Vector3::TransformNormal(Vector3::UnitZ, rotation);
 
-	m_target = m_targetObject->GetPos();
-	m_pos = m_target + Vector3::Transform(m_dpos, rotCam);
+	Vector3 cameraPosition = m_pos;
 
+	Vector3 targetPoint = cameraPosition + forwardDirection;
+
+	m_viewMat = Matrix::CreateLookAt(cameraPosition, targetPoint, m_up);
+
+	m_projMat = Matrix::CreatePerspectiveFieldOfView(m_fieldOfView, m_aspectRatio, m_nearPlaneDistance, m_farPlaneDistance);
+
+	
 
 
 	//and then set up proj and view matrices
