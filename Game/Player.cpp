@@ -60,7 +60,7 @@ void Player::Tick(GameData* _GD)
 	if (m_pitch > XMConvertToRadians(60)) m_pitch = XMConvertToRadians(60);
 	if (m_pitch < XMConvertToRadians(-60)) m_pitch = XMConvertToRadians(-60);
 
-	m_pitch = -m_pitch
+	
 
 	
 	
