@@ -22,6 +22,7 @@ GameObject::~GameObject()
 
 void GameObject::Tick(GameData* _GD)
 {
+
 	if (m_physicsOn)
 	{
 		Vector3 newVel = m_vel + _GD->m_dt * (m_acc - m_drag*m_vel);

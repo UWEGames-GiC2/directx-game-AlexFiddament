@@ -20,11 +20,16 @@ firstpersoncam::~firstpersoncam()
 void firstpersoncam::Tick(GameData* _GD)
 {
 	
-	//Set up position of camera and target position of camera based on new position and orientation of target object
+	
+
+	m_pos = m_targetObject->GetPos();
+
+	
+	
 	
 	
 		float speed = 0.0007f;
-		m_camYaw += sin(speed * _GD->m_MS.x) * m_dpos.z;
+		m_camYaw +=  + sin(speed * _GD->m_MS.x) * m_dpos.z;
 		m_camPitch += sin(speed * _GD->m_MS.y) * m_dpos.z;
 
 		if (m_camPitch > XMConvertToRadians(60)) m_camPitch = XMConvertToRadians(60);
@@ -46,6 +51,8 @@ void firstpersoncam::Tick(GameData* _GD)
 	m_viewMat = Matrix::CreateLookAt(cameraPosition, targetPoint, m_up);
 
 	m_projMat = Matrix::CreatePerspectiveFieldOfView(m_fieldOfView, m_aspectRatio, m_nearPlaneDistance, m_farPlaneDistance);
+
+	m_camYaw += XMConvertToRadians(180);
 
 	
 
