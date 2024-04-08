@@ -23,14 +23,18 @@ void firstpersoncam::Tick(GameData* _GD)
 	
 
 	m_pos = m_targetObject->GetPos();
+	m_camYaw = m_targetObject->GetYaw();
+	m_camPitch = m_targetObject->GetPitch();
+
+	
 
 	
 	
 	
 	
 		float speed = 0.0007f;
-		m_camYaw +=  + sin(speed * _GD->m_MS.x) * m_dpos.z;
-		m_camPitch += sin(speed * _GD->m_MS.y) * m_dpos.z;
+		
+		
 
 		if (m_camPitch > XMConvertToRadians(60)) m_camPitch = XMConvertToRadians(60);
 		if (m_camPitch < XMConvertToRadians(-60)) m_camPitch = XMConvertToRadians(-60);

@@ -38,7 +38,7 @@ void Player::Tick(GameData* _GD)
 	{
 		//TURN AND FORWARD CONTROL HERE
 		Vector3 forwardMove = 40.0f * Vector3::Forward;
-		Matrix rotMove = Matrix::CreateRotationY(m_yaw);
+		Matrix rotMove = Matrix::CreateRotationY(m_yaw + XMConvertToRadians(180));
 		forwardMove = Vector3::Transform(forwardMove, rotMove);
 		if (_GD->m_KBS.W)
 		{
@@ -60,6 +60,8 @@ void Player::Tick(GameData* _GD)
 	if (m_pitch > XMConvertToRadians(60)) m_pitch = XMConvertToRadians(60);
 	if (m_pitch < XMConvertToRadians(-60)) m_pitch = XMConvertToRadians(-60);
 
+	m_pitch = -m_pitch
+
 	
 	
 
@@ -74,6 +76,8 @@ void Player::Tick(GameData* _GD)
 	}
 
 	//move player up and down
+
+
 	if (_GD->m_KBS.R)
 	{
 		m_acc.y += 40.0f;
