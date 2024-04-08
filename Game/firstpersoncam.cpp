@@ -52,7 +52,7 @@ void firstpersoncam::Tick(GameData* _GD)
 
 	m_projMat = Matrix::CreatePerspectiveFieldOfView(m_fieldOfView, m_aspectRatio, m_nearPlaneDistance, m_farPlaneDistance);
 
-	m_camYaw += XMConvertToRadians(180);
+	
 
 	
 
