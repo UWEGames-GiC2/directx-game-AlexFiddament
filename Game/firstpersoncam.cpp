@@ -26,11 +26,8 @@ void firstpersoncam::Tick(GameData* _GD)
 	m_camYaw = m_targetObject->GetYaw();
 	m_camPitch = m_targetObject->GetPitch();
 
-	
+	m_pos += m_dpos;
 
-	
-	
-	
 	
 		float speed = 0.0007f;
 		
