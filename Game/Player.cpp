@@ -24,16 +24,6 @@ void Player::Tick(GameData* _GD)
 {
 	switch (_GD->m_GS)
 	{
-	case GS_GAME_OVER:
-	{
-		{
-			//MOUSE CONTROL SCHEME HERE
-			float speed = 10.0f;
-			m_acc.x += speed * _GD->m_MS.x;
-			m_acc.z += speed * _GD->m_MS.y;
-			break;
-		}
-	}
 	case GS_PLAY_FIRST_PERSON_CAM:
 	{
 		//TURN AND FORWARD CONTROL HERE

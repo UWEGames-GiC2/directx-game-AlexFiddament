@@ -125,6 +125,17 @@ void Game::Initialize(HWND _window, int _width, int _height)
     m_firstpersoncam = new firstpersoncam(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 0.0f, 0.0f));
     m_GameObjects.push_back(m_firstpersoncam);
 
+   
+    
+    
+    if (GS_GAME_OVER)
+    {
+        
+    }
+
+  
+
+
     
 
     //create DrawData struct and populate its pointers
@@ -506,10 +517,28 @@ void Game::ReadInput()
     if (m_GD->m_KBS.L)
     {
         m_GD->m_GS = GS_GAME_OVER;
+        m_GameObjects2D.clear();
+        TextGO2D* text = new TextGO2D("You lose!");
+        text->SetPos(Vector2(300, 300));
+        text->SetColour(Color((float*)&Colors::Black));
+        m_GameObjects2D.push_back(text);
+        
+
     }
     if (m_GD->m_KBS.O)
     {
         m_GD->m_GS = GS_WIN;
+        m_GameObjects2D.clear();
+        TextGO2D* text = new TextGO2D("You Win!");
+        text->SetPos(Vector2(300, 300));
+        text->SetColour(Color((float*)&Colors::Black));
+        m_GameObjects2D.push_back(text);
+        
+    }
+    if (m_GD->m_KBS.B)
+    {
+        m_GD->m_GS = GS_PLAY_FIRST_PERSON_CAM;
+        m_GameObjects2D.clear();
     }
 
 
