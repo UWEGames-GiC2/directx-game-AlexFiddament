@@ -65,7 +65,7 @@ void Game::Initialize(HWND _window, int _width, int _height)
 
     //create GameData struct and populate its pointers
     m_GD = new GameData;
-    m_GD->m_GS = GS_PLAY_TPS_CAM;
+    m_GD->m_GS = GS_PLAY_FIRST_PERSON_CAM;
 
     //set up systems for 2D rendering
     m_DD2D = new DrawData2D();
@@ -205,7 +205,8 @@ void Game::Render()
 
     //set which camera to be used
     m_DD->m_cam = m_cam;
-    if (m_GD->m_GS == GS_PLAY_TPS_CAM)
+
+    if (m_GD->m_GS == GS_PLAY_FIRST_PERSON_CAM)
     {
         m_DD->m_cam = m_firstpersoncam;
     }
@@ -501,6 +502,16 @@ void Game::ReadInput()
     {
         ExitGame();
     }
+
+    if (m_GD->m_KBS.L)
+    {
+        m_GD->m_GS = GS_GAME_OVER;
+    }
+    if (m_GD->m_KBS.O)
+    {
+        m_GD->m_GS = GS_WIN;
+    }
+
 
     m_GD->m_MS = m_mouse->GetState();
 

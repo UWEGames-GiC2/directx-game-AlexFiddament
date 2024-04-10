@@ -24,7 +24,7 @@ void Player::Tick(GameData* _GD)
 {
 	switch (_GD->m_GS)
 	{
-	case GS_PLAY_MAIN_CAM:
+	case GS_GAME_OVER:
 	{
 		{
 			//MOUSE CONTROL SCHEME HERE
@@ -34,7 +34,7 @@ void Player::Tick(GameData* _GD)
 			break;
 		}
 	}
-	case GS_PLAY_TPS_CAM:
+	case GS_PLAY_FIRST_PERSON_CAM:
 	{
 		//TURN AND FORWARD CONTROL HERE
 		Vector3 forwardMove = 40.0f * Vector3::Forward;
