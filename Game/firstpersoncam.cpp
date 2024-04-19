@@ -38,7 +38,7 @@ void firstpersoncam::Tick(GameData* _GD)
 		
 	
 
-	camrotatey = Matrix::CreateRotationX(-m_camPitch);
+	camrotatey = Matrix::CreateRotationX(m_camPitch);
 	camrotatex = Matrix::CreateRotationY(m_camYaw);
 
 	Matrix rotation = camrotatey * camrotatex;

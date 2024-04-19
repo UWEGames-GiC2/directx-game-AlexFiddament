@@ -104,12 +104,21 @@ void Game::Initialize(HWND _window, int _width, int _height)
     cube->SetScale(20.0f,0.1f,20.0f);
     m_GameObjects.push_back(cube);
 
+    //example basic 3D stuff
+    Terrain* terrain = new Terrain("table", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.25f * Vector3::One);
+    m_GameObjects.push_back(terrain);
+    m_ColliderObjects.push_back(terrain);
+
+    Terrain* terrain2 = new Terrain("table", m_d3dDevice.Get(), m_fxFactory, Vector3(-100.0f, 0.0f, -100.0f), 0.0f, 0.0f, 0.0f, Vector3::One);
+    m_GameObjects.push_back(terrain2);
+    m_ColliderObjects.push_back(terrain2);
+
   
 
 
     //add Player
     Player* pPlayer = new Player("BirdModelV1", m_d3dDevice.Get(), m_fxFactory);
-    pPlayer->SetScale(0.1f, 0.1f, 0.1f);
+    pPlayer->SetScale(1.0f, 1.0f, 1.0f);
     m_GameObjects.push_back(pPlayer);
     m_PhysicsObjects.push_back(pPlayer);
 
