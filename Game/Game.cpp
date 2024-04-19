@@ -98,27 +98,45 @@ void Game::Initialize(HWND _window, int _width, int _height)
 
 
 
-    VBCube* cube = new VBCube();
-    cube->init(11, m_d3dDevice.Get());
-    cube->SetPos(Vector3(100.0f, 0.0f, 0.0f));
-    cube->SetScale(20.0f,0.1f,20.0f);
-    m_GameObjects.push_back(cube);
+   
+
+   
+
 
     //example basic 3D stuff
-    Terrain* terrain = new Terrain("table", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.25f * Vector3::One);
+    
+
+
+
+    
+
+
+    Terrain* terrain = new Terrain("Floor", m_d3dDevice.Get(), m_fxFactory, Vector3(0.0f, 0.0f, -70.0f), 0.0f, 0.0f, 0.0f, 2.0f * Vector3::One);
     m_GameObjects.push_back(terrain);
     m_ColliderObjects.push_back(terrain);
 
-    Terrain* terrain2 = new Terrain("table", m_d3dDevice.Get(), m_fxFactory, Vector3(-100.0f, 0.0f, -100.0f), 0.0f, 0.0f, 0.0f, Vector3::One);
+    Terrain* terrain2 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain2);
     m_ColliderObjects.push_back(terrain2);
+
+    Terrain* terrain3 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain3);
+    m_ColliderObjects.push_back(terrain3);
+
+    Terrain* terrain4 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain4);
+    m_ColliderObjects.push_back(terrain4);
+
+    Terrain* terrain5 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain5);
+    m_ColliderObjects.push_back(terrain5);
 
   
 
 
     //add Player
     Player* pPlayer = new Player("BirdModelV1", m_d3dDevice.Get(), m_fxFactory);
-    pPlayer->SetScale(1.0f, 1.0f, 1.0f);
+    pPlayer->SetScale(0.40f, 0.40f, 0.40f);
     m_GameObjects.push_back(pPlayer);
     m_PhysicsObjects.push_back(pPlayer);
 
