@@ -109,11 +109,17 @@ void Game::Initialize(HWND _window, int _width, int _height)
 
 
     
+    Terrain* terrain0 = new Terrain("Floor", m_d3dDevice.Get(), m_fxFactory, Vector3(0.0f, 50.0f, -70.0f), 0.0f, 0.0f, 0.0f, 3.0f * Vector3::One);
+    m_GameObjects.push_back(terrain0);
+    m_ColliderObjects.push_back(terrain0);
 
-
-    Terrain* terrain = new Terrain("Floor", m_d3dDevice.Get(), m_fxFactory, Vector3(0.0f, 0.0f, -70.0f), 0.0f, 0.0f, 0.0f, 2.0f * Vector3::One);
+    Terrain* terrain = new Terrain("Floor", m_d3dDevice.Get(), m_fxFactory, Vector3(0.0f, 0.0f, -70.0f), 0.0f, 0.0f, 0.0f, 3.0f * Vector3::One);
     m_GameObjects.push_back(terrain);
     m_ColliderObjects.push_back(terrain);
+
+    Terrain* terrain1 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain1);
+    m_ColliderObjects.push_back(terrain1);
 
     Terrain* terrain2 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain2);
@@ -126,10 +132,77 @@ void Game::Initialize(HWND _window, int _width, int _height)
     Terrain* terrain4 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain4);
     m_ColliderObjects.push_back(terrain4);
-
-    Terrain* terrain5 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    Terrain* terrain5 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain5);
     m_ColliderObjects.push_back(terrain5);
+
+    Terrain* terrain6 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, 25.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain6);
+    m_ColliderObjects.push_back(terrain6);
+
+    Terrain* terrain7 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -50.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain7);
+    m_ColliderObjects.push_back(terrain7);
+
+    Terrain* terrain8 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -125.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain8);
+    m_ColliderObjects.push_back(terrain8);
+
+    Terrain* terrain9 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -200.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain9);
+    m_ColliderObjects.push_back(terrain9);
+
+    Terrain* terrain10 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain10);
+    m_ColliderObjects.push_back(terrain10);
+
+    Terrain* terrain11 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain11);
+    m_ColliderObjects.push_back(terrain11);
+
+    Terrain* terrain12 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain12);
+    m_ColliderObjects.push_back(terrain12);
+
+    Terrain* terrain13 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain13);
+    m_ColliderObjects.push_back(terrain13);
+
+    Terrain* terrain15 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -50.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain15);
+    m_ColliderObjects.push_back(terrain15);
+
+    Terrain* terrain16 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, 25.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain16);
+    m_ColliderObjects.push_back(terrain16);
+
+    Terrain* terrain17 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -125.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain17);
+    m_ColliderObjects.push_back(terrain17);
+
+    Terrain* terrain18 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -200.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain18);
+    m_ColliderObjects.push_back(terrain18);
+
+    Terrain* terrain19 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 25.0f, 25.0f), 0.0f, XMConvertToRadians(90), XMConvertToRadians(180), 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain19);
+    m_ColliderObjects.push_back(terrain19);
+
+    Terrain* terrain20 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 0.0f, 25.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain20);
+    m_ColliderObjects.push_back(terrain20);
+
+    Terrain* terrain21 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, 25.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain21);
+    m_ColliderObjects.push_back(terrain21);
+
+    Terrain* terrain22 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, -50.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrain22);
+    m_ColliderObjects.push_back(terrain22);
+    
+
+   
+
 
   
 
@@ -139,14 +212,15 @@ void Game::Initialize(HWND _window, int _width, int _height)
     pPlayer->SetScale(0.40f, 0.40f, 0.40f);
     m_GameObjects.push_back(pPlayer);
     m_PhysicsObjects.push_back(pPlayer);
+    pPlayer->SetPos(Vector3(0.0F, 30.0f, 50.0f));
 
     //create a base camera
     m_cam = new Camera(0.25f * XM_PI, AR, 1.0f, 10000.0f, Vector3::UnitY, Vector3::Zero);
-    m_cam->SetPos(Vector3(0.0f, 200.0f, 200.0f));
+    m_cam->SetPos(Vector3(50.0f, 5000.0f, 5000.0f));
     m_GameObjects.push_back(m_cam);
 
     //add a secondary camera
-    m_TPScam = new TPSCamera(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 10.0f, 50.0f));
+    m_TPScam = new TPSCamera(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(50.0f, 50000.0f, 50000.0f));
     m_GameObjects.push_back(m_TPScam);
 
     m_firstpersoncam = new firstpersoncam(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 0.0f, 0.0f));
@@ -244,10 +318,10 @@ void Game::Render()
     //set which camera to be used
     m_DD->m_cam = m_cam;
 
-    if (m_GD->m_GS == GS_PLAY_FIRST_PERSON_CAM)
-    {
-        m_DD->m_cam = m_firstpersoncam;
-    }
+    
+    
+     m_DD->m_cam = m_firstpersoncam;
+    
 
     //update the constant buffer for the rendering of VBGOs
     VBGO::UpdateConstantBuffer(m_DD);
@@ -556,7 +630,7 @@ void Game::ReadInput()
     {
         m_GD->m_GS = GS_WIN;
         m_GameObjects2D.clear();
-        TextGO2D* text = new TextGO2D("You Win!");
+        TextGO2D* text = new TextGO2D("You Win! \npress enter to play again?");
         text->SetPos(Vector2(300, 300));
         text->SetColour(Color((float*)&Colors::Black));
         m_GameObjects2D.push_back(text);
@@ -566,6 +640,7 @@ void Game::ReadInput()
     {
         m_GD->m_GS = GS_PLAY_FIRST_PERSON_CAM;
         m_GameObjects2D.clear();
+
     }
 
 

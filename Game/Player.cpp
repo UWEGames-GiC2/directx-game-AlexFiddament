@@ -43,21 +43,21 @@ void Player::Tick(GameData* _GD)
 	}
 
 	//change orinetation of player
-	float rotSpeed = 2 * _GD->m_dt;
+	float rotSpeed = 1 * _GD->m_dt;
 
 	m_yaw -= rotSpeed * _GD->m_MS.x;
 
 	m_pitch -= -rotSpeed * _GD->m_MS.y;
 
-	
+
 
 	if (m_pitch > XMConvertToRadians(60)) m_pitch = XMConvertToRadians(60);
 	if (m_pitch < XMConvertToRadians(-60)) m_pitch = XMConvertToRadians(-60);
 
-	
 
-	
-	
+
+
+
 
 
 	;//if (_GD->m_KBS.A)
@@ -91,6 +91,36 @@ void Player::Tick(GameData* _GD)
 		m_pos *= maxLength;
 		m_vel *= -0.9; //VERY simple bounce back
 	}
+
+
+	switch (_GD->m_GS)
+	{
+	case GS_PLAY_FIRST_PERSON_CAM:
+	{
+		if (_GD->m_KBS.Space)
+		{
+
+
+			m_vel.y = 20.0f;
+
+		}
+
+
+		m_acc.y -= 15.0f;
+		break;
+
+	}
+	}
+
+	if (_GD->m_KBS.Enter)
+	{
+		SetPos(Vector3(0.0F, 30.0f, 50.0f));
+	}
+
+
+   
+
+	
 
 	//apply my base behaviour
 	CMOGO::Tick(_GD);
