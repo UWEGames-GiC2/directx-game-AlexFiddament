@@ -15,6 +15,8 @@ public:
 
 	virtual void Tick(GameData* _GD) override;
 
+	vector<CMOGO*> Projectiles;
+
 protected:
 
 };

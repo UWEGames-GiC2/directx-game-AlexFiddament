@@ -12,6 +12,8 @@
 #include "Mouse.h"
 #include "Audio.h"
 #include "CMOGO.h"
+#include "Projectile.h"
+
 
 using std::list;
 
@@ -115,6 +117,13 @@ private:
 
     std::vector<CMOGO*> m_ColliderObjects;
     std::vector<CMOGO*> m_PhysicsObjects;
+    std::vector<CMOGO*> m_PlayerProjectile;
+
+    std::vector<Projectile*> m_Projectile;
+    
+    
+    
+
 
     void CheckCollision();
                                          

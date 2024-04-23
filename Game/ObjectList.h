@@ -14,6 +14,7 @@
 #include "Light.h"
 #include "GPGO.h"
 #include "firstpersoncam.h"
+#include "Projectile.h"
 
 //VBGO examples
 #include "fileVBGO.h"

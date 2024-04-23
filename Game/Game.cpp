@@ -106,8 +106,6 @@ void Game::Initialize(HWND _window, int _width, int _height)
     //example basic 3D stuff
     
 
-
-
     
     Terrain* terrain0 = new Terrain("Floor", m_d3dDevice.Get(), m_fxFactory, Vector3(0.0f, 50.0f, -70.0f), 0.0f, 0.0f, 0.0f, 3.0f * Vector3::One);
     m_GameObjects.push_back(terrain0);
@@ -202,7 +200,7 @@ void Game::Initialize(HWND _window, int _width, int _height)
     
 
    
-
+    
 
   
 
@@ -213,6 +211,11 @@ void Game::Initialize(HWND _window, int _width, int _height)
     m_GameObjects.push_back(pPlayer);
     m_PhysicsObjects.push_back(pPlayer);
     pPlayer->SetPos(Vector3(0.0F, 30.0f, 50.0f));
+    pPlayer->Projectiles = m_PlayerProjectile;
+
+    
+
+
 
     //create a base camera
     m_cam = new Camera(0.25f * XM_PI, AR, 1.0f, 10000.0f, Vector3::UnitY, Vector3::Zero);
@@ -329,15 +332,26 @@ void Game::Render()
     //Draw 3D Game Obejects
     for (list<GameObject*>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
     {
-        (*it)->Draw(m_DD);
+        if ((*it)->isactive())
+        {
+
+            (*it)->Draw(m_DD);
+
+        }
+        
     }
 
     // Draw sprite batch stuff 
     m_DD2D->m_Sprites->Begin(SpriteSortMode_Deferred, m_states->NonPremultiplied());
     for (list<GameObject2D*>::iterator it = m_GameObjects2D.begin(); it != m_GameObjects2D.end(); it++)
     {
+
+
+
         (*it)->Draw(m_DD2D);
+
     }
+
     m_DD2D->m_Sprites->End();
 
     //drawing text screws up the Depth Stencil State, this puts it back again!

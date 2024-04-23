@@ -178,6 +178,7 @@
     <ClInclude Include="GameObject2D.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GPGO.h" />
+    <ClInclude Include="Projectile.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="ImageGO2D.h" />
     <ClInclude Include="Light.h" />
@@ -222,6 +223,7 @@
     </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TestSound.cpp" />
     <ClCompile Include="TextGO2D.cpp" />
