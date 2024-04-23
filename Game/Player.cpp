@@ -113,7 +113,9 @@ void Player::Tick(GameData* _GD)
 					printf("fired");
 
 					Vector3 forwardMove = 40.0f * Vector3::Forward;
-					Matrix rotMove = Matrix::CreateRotationY(m_yaw + XMConvertToRadians(180));
+					Matrix rotYaw = Matrix::CreateRotationY(this->GetYaw() + XMConvertToRadians(180));
+					Matrix rotPitch = Matrix::CreateRotationX(-this->GetPitch());
+					Matrix rotMove = rotPitch * rotYaw;
 					forwardMove = Vector3::Transform(forwardMove, rotMove);
 					Projectiles[i]->SetPos(this->GetPos());
 					Projectiles[i]->SetActive(true);

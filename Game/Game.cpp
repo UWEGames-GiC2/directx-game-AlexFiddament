@@ -694,7 +694,7 @@ void Game::CheckProjectileCollision()
     {
         if (m_PlayerProjectile[i]->isactive() && m_PlayerProjectile[i]->Intersects(*m_ColliderObjects[j])) //std::cout << "Collision Detected!" << std::endl;
         {
-            printf("HIT AAAAAAAAAAAAAAAA");
+            printf("AAAAAAAAAAAAAAAA");
             m_PlayerProjectile[i]->SetActive(false);
         }
     }
