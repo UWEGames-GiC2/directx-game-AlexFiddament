@@ -310,6 +310,7 @@ void Game::Update(DX::StepTimer const& _timer)
     }
 
     CheckCollision();
+    CheckProjectileCollision();
 }
 
 // Draws the scene.
@@ -683,6 +684,18 @@ void Game::CheckCollision()
             XMFLOAT3 eject_vect = Collision::ejectionCMOGO(*m_PhysicsObjects[i], *m_ColliderObjects[j]);
             auto pos = m_PhysicsObjects[i]->GetPos();
             m_PhysicsObjects[i]->SetPos(pos - eject_vect);
+        }
+    }
+}
+
+void Game::CheckProjectileCollision()
+{
+    for (int i = 0; i < m_PlayerProjectile.size(); i++) for (int j = 0; j < m_ColliderObjects.size(); j++)
+    {
+        if (m_PlayerProjectile[i]->isactive() && m_PlayerProjectile[i]->Intersects(*m_ColliderObjects[j])) //std::cout << "Collision Detected!" << std::endl;
+        {
+            printf("HIT AAAAAAAAAAAAAAAA");
+            m_PlayerProjectile[i]->SetActive(false);
         }
     }
 }

@@ -126,6 +126,7 @@ private:
 
 
     void CheckCollision();
+    void CheckProjectileCollision();
                                          
     //sound stuff
 	//This uses a simple system, but a better pipeline can be used using Wave Banks
