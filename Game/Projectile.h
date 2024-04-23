@@ -1,17 +1,18 @@
+#ifndef PROJECTILE_H
+#define PROJECTILE_H
+
 #include "CMOGO.h"
 
-
-class Projectile: public CMOGO
+class Projectiles : public CMOGO
 {
-
 public:
-	Projectile(string _fileName, ID3D11Device* _pd3dDevice, IEffectFactory* _EF);
-	~Projectile();
+    Projectiles(string _fileName, ID3D11Device* _pd3dDevice, IEffectFactory* _EF);
+    ~Projectiles();
 
-	virtual void Tick(GameData* _GD) override;
+    virtual void Tick(GameData* _GD) override;
 
 protected:
-
-
 };
+
+#endif 
 

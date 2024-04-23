@@ -119,7 +119,7 @@ private:
     std::vector<CMOGO*> m_PhysicsObjects;
     std::vector<CMOGO*> m_PlayerProjectile;
 
-    std::vector<Projectile*> m_Projectile;
+    std::vector<Projectiles*> m_Projectile;
     
     
     

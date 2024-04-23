@@ -3,7 +3,7 @@
 #include <dinput.h>
 #include "GameData.h"
 
-Projectile::Projectile(string _fileName, ID3D11Device* _pd3dDevice, IEffectFactory* _EF) : CMOGO(_fileName, _pd3dDevice, _EF)
+Projectiles::Projectiles(string _fileName, ID3D11Device* _pd3dDevice, IEffectFactory* _EF) : CMOGO(_fileName, _pd3dDevice, _EF)
 {
 	
 	m_fudge = Matrix::CreateRotationY(XM_PI);
@@ -14,13 +14,13 @@ Projectile::Projectile(string _fileName, ID3D11Device* _pd3dDevice, IEffectFacto
 	SetPhysicsOn(true);
 }
 
-Projectile::~Projectile()
+Projectiles::~Projectiles()
 {
 	
 }
 
 
-void Projectile::Tick(GameData* _GD)
+void Projectiles::Tick(GameData* _GD)
 {
 	
 
