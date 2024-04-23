@@ -97,13 +97,40 @@ void Player::Tick(GameData* _GD)
 	{
 	case GS_PLAY_FIRST_PERSON_CAM:
 	{
-		if (_GD->m_KBS.Space)
+		if (_GD->m_MS.leftButton)
 		{
 
 
 			m_vel.y = 20.0f;
 
 		}
+		if (_GD->m_KBS_tracker.pressed.Space)
+		{
+			for (size_t i = 0; i < Projectiles.size(); i++)
+			{
+				if (!Projectiles[i]->isactive())
+				{
+					printf("fired");
+
+					Vector3 forwardMove = 40.0f * Vector3::Forward;
+					Matrix rotMove = Matrix::CreateRotationY(m_yaw + XMConvertToRadians(180));
+					forwardMove = Vector3::Transform(forwardMove, rotMove);
+					Projectiles[i]->SetPos(this->GetPos());
+					Projectiles[i]->SetActive(true);
+					Projectiles[i]->SetYaw(this->GetYaw());
+					Projectiles[i]->SetDrag(0.01f);
+					Projectiles[i]->SetPhysicsOn(true);
+					Projectiles[i]->SetAcceleration(forwardMove * 1000.0f);
+
+
+					break;
+
+
+				}
+			}
+			
+		}
+
 
 
 		m_acc.y -= 15.0f;

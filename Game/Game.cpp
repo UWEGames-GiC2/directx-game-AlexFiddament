@@ -203,6 +203,14 @@ void Game::Initialize(HWND _window, int _width, int _height)
     
 
   
+    for (size_t i = 0; i < 15; i++)
+    {
+        Projectiles* pProjectile = new Projectiles("Ball FBX", m_d3dDevice.Get(), m_fxFactory);
+        pProjectile->SetActive(false);
+        m_GameObjects.push_back(pProjectile);
+        m_PlayerProjectile.push_back(pProjectile);
+
+    }
 
 
     //add Player
