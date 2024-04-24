@@ -690,6 +690,7 @@ void Game::ReadInput()
     {
         m_GD->m_GS = GS_PLAY_FIRST_PERSON_CAM;
         m_GameObjects2D.clear();
+        lives = 3;
 
     }
 
