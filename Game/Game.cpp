@@ -734,7 +734,7 @@ void Game::CheckPlayerCollision()
         if (m_PlayerObject[i]->Intersects(*m_ColliderObjects[j]))
         {
             XMFLOAT3 eject_vect = Collision::ejectionCMOGO(*m_PlayerObject[i], *m_ColliderObjects[j]);
-            auto pos = m_PhysicsObjects[i]->GetPos();
+            auto pos = m_PlayerObject[i]->GetPos();
             m_PlayerObject[i]->SetPos(pos - eject_vect);
             printf("PLAYER");
             m_PlayerObject[i]->SetPos(Vector3(0.0F, 30.0f, 50.0f));
