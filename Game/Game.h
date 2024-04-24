@@ -60,6 +60,8 @@ public:
     // Properties
     void GetDefaultSize( int& _width, int& _height ) const noexcept;
 
+    
+
 private:
 
     void Update(DX::StepTimer const& _timer);
@@ -72,6 +74,8 @@ private:
     void CreateResources();
 
     void OnDeviceLost();
+    int lives = 3;
+
 
     // Device resources.
     HWND                                            m_window;
@@ -116,9 +120,9 @@ private:
     //list<CMOGO*> m_PhysicsObjects
 
     std::vector<CMOGO*> m_ColliderObjects;
+    std::vector<CMOGO*> m_PlayerObject;
     std::vector<CMOGO*> m_PhysicsObjects;
     std::vector<CMOGO*> m_PlayerProjectile;
-
     std::vector<Projectiles*> m_Projectile;
     
     
@@ -127,6 +131,9 @@ private:
 
     void CheckCollision();
     void CheckProjectileCollision();
+    void CheckPlayerCollision();
+
+
                                          
     //sound stuff
 	//This uses a simple system, but a better pipeline can be used using Wave Banks

@@ -217,9 +217,10 @@ void Game::Initialize(HWND _window, int _width, int _height)
     Player* pPlayer = new Player("BirdModelV1", m_d3dDevice.Get(), m_fxFactory);
     pPlayer->SetScale(0.40f, 0.40f, 0.40f);
     m_GameObjects.push_back(pPlayer);
-    m_PhysicsObjects.push_back(pPlayer);
+    m_PlayerObject.push_back(pPlayer);
     pPlayer->SetPos(Vector3(0.0F, 30.0f, 50.0f));
     pPlayer->Projectiles = m_PlayerProjectile;
+
 
     
 
@@ -311,6 +312,14 @@ void Game::Update(DX::StepTimer const& _timer)
 
     CheckCollision();
     CheckProjectileCollision();
+    CheckPlayerCollision();
+    if (lives == 0)
+    {
+        m_GD->m_GS = GS_GAME_OVER;
+    }
+    
+
+
 }
 
 // Draws the scene.
@@ -365,6 +374,32 @@ void Game::Render()
 
     //drawing text screws up the Depth Stencil State, this puts it back again!
     m_d3dContext->OMSetDepthStencilState(m_states->DepthDefault(), 0);
+
+    if (m_GD->m_GS == GS_GAME_OVER)
+    {
+        m_GameObjects2D.clear();
+        TextGO2D* text = new TextGO2D("You lose!");
+        text->SetPos(Vector2(300, 300));
+        text->SetColour(Color((float*)&Colors::Black));
+        m_GameObjects2D.push_back(text);
+        m_PlayerObject[0]->SetPos(Vector3(0.0F, 30.0f, 50.0f));
+        m_PlayerObject[0]->SetAcceleration(Vector3(0.0F, 0.0f, 0.0f));
+
+    }
+
+    if (m_GD->m_GS == GS_WIN)
+    {
+        m_GameObjects2D.clear();
+        TextGO2D* text = new TextGO2D("You Win! \npress enter to play again?");
+        text->SetPos(Vector2(300, 300));
+        text->SetColour(Color((float*)&Colors::Black));
+        m_GameObjects2D.push_back(text);
+        m_PlayerObject[0]->SetPos(Vector3(0.0F, 30.0f, 50.0f));
+        m_PlayerObject[0]->SetAcceleration(Vector3(0.0F, 0.0f, 0.0f));
+
+    }
+
+    
 
     Present();
 }
@@ -641,22 +676,14 @@ void Game::ReadInput()
     if (m_GD->m_KBS.L)
     {
         m_GD->m_GS = GS_GAME_OVER;
-        m_GameObjects2D.clear();
-        TextGO2D* text = new TextGO2D("You lose!");
-        text->SetPos(Vector2(300, 300));
-        text->SetColour(Color((float*)&Colors::Black));
-        m_GameObjects2D.push_back(text);
         
+      
 
     }
     if (m_GD->m_KBS.O)
     {
         m_GD->m_GS = GS_WIN;
-        m_GameObjects2D.clear();
-        TextGO2D* text = new TextGO2D("You Win! \npress enter to play again?");
-        text->SetPos(Vector2(300, 300));
-        text->SetColour(Color((float*)&Colors::Black));
-        m_GameObjects2D.push_back(text);
+        
         
     }
     if (m_GD->m_KBS.B)
@@ -699,3 +726,32 @@ void Game::CheckProjectileCollision()
         }
     }
 }
+
+void Game::CheckPlayerCollision()
+{
+    for (int i = 0; i < m_PlayerObject.size(); i++) for (int j = 0; j < m_ColliderObjects.size(); j++)
+    {
+        if (m_PlayerObject[i]->Intersects(*m_ColliderObjects[j]))
+        {
+            XMFLOAT3 eject_vect = Collision::ejectionCMOGO(*m_PlayerObject[i], *m_ColliderObjects[j]);
+            auto pos = m_PhysicsObjects[i]->GetPos();
+            m_PlayerObject[i]->SetPos(pos - eject_vect);
+            printf("PLAYER");
+            m_PlayerObject[i]->SetPos(Vector3(0.0F, 30.0f, 50.0f));
+            m_PlayerObject[i]->SetAcceleration(Vector3(0.0F, 0.0f, 0.0f));
+            lives -= 1;
+            printf("%d\n", lives);
+
+            
+                
+              
+
+            
+
+            
+            
+        }
+    }
+}
+
+
