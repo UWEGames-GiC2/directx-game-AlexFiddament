@@ -75,6 +75,7 @@ private:
 
     void OnDeviceLost();
     int lives = 3;
+    bool move = false;
 
 
     // Device resources.
@@ -122,7 +123,9 @@ private:
     std::vector<CMOGO*> m_ColliderObjects;
     std::vector<CMOGO*> m_PlayerObject;
     std::vector<CMOGO*> m_PhysicsObjects;
+    std::vector<CMOGO*> m_TargetObjects;
     std::vector<CMOGO*> m_PlayerProjectile;
+    std::vector<CMOGO*> m_WinObject;
     std::vector<Projectiles*> m_Projectile;
     
     
@@ -132,6 +135,8 @@ private:
     void CheckCollision();
     void CheckProjectileCollision();
     void CheckPlayerCollision();
+    void ChecktargetCollision();
+    void CheckWinCollision();
 
 
                                          

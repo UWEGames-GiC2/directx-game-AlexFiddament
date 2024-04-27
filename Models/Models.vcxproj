@@ -152,9 +152,11 @@
     <MeshContentTask Include="ball\Ball FBX.fbx" />
     <MeshContentTask Include="Bird\BirdModelV1.fbx" />
     <MeshContentTask Include="floor\Floor.FBX" />
+    <MeshContentTask Include="glass cube.fbx" />
     <MeshContentTask Include="Table\table.FBX">
       <FileType>Document</FileType>
     </MeshContentTask>
+    <MeshContentTask Include="target\targhet.fbx" />
     <MeshContentTask Include="Vase\JEMINA vase -up.fbx">
       <FileType>Document</FileType>
     </MeshContentTask>

@@ -238,6 +238,36 @@ void Game::Initialize(HWND _window, int _width, int _height)
     m_GameObjects.push_back(terrain33);
     m_ColliderObjects.push_back(terrain33);
 
+    Terrain* target = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(150.0f, 30.0f,60.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    m_GameObjects.push_back(target);
+    m_TargetObjects.push_back(target);
+
+    Terrain* target1 = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(50.0f, 30.0f, -10.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    m_GameObjects.push_back(target1);
+    m_TargetObjects.push_back(target1);
+
+    Terrain* end = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(-10.0f, 30.0f, -10.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    m_GameObjects.push_back(end);
+    m_WinObject.push_back(end);
+
+    Terrain* terrainmove = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 0.0f, -200.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    m_GameObjects.push_back(terrainmove);
+    m_ColliderObjects.push_back(terrainmove);
+
+   
+   
+    std::string livesStr = std::to_string(lives);
+  
+    TextGO2D* text = new TextGO2D("lives = " + livesStr);
+    text->SetPos(Vector2(450, 10));
+    text->SetColour(Color((float*)&Colors::Yellow));
+    m_GameObjects2D.push_back(text);
+
+    
+
+    
+    
+    
     
 
     
@@ -363,6 +393,8 @@ void Game::Update(DX::StepTimer const& _timer)
     CheckCollision();
     CheckProjectileCollision();
     CheckPlayerCollision();
+    ChecktargetCollision();
+    CheckWinCollision();
     if (lives == 0)
     {
         m_GD->m_GS = GS_GAME_OVER;
@@ -461,8 +493,30 @@ void Game::Render()
             m_GD->m_GS = GS_PLAY_FIRST_PERSON_CAM;
             m_GameObjects2D.clear();
             lives = 3;
+            std::string livesStr = std::to_string(lives);
+
+
+            TextGO2D* text = new TextGO2D("lives = " + livesStr);
+            text->SetPos(Vector2(450, 10));
+            text->SetColour(Color((float*)&Colors::Yellow));
+            m_GameObjects2D.push_back(text);
+
+            for (int i = 0; i < m_TargetObjects.size(); i++) 
+            {
+                m_TargetObjects[i]->SetActive(true);
+            }
+            
+            
+
+            
 
         }
+
+    }
+    if (move)
+    {
+        
+        
 
     }
 
@@ -740,19 +794,6 @@ void Game::ReadInput()
         ExitGame();
     }
 
-    if (m_GD->m_KBS.L)
-    {
-        m_GD->m_GS = GS_GAME_OVER;
-        
-      
-
-    }
-    if (m_GD->m_KBS.O)
-    {
-        m_GD->m_GS = GS_WIN;
-        
-        
-    }
     
 
 
@@ -768,7 +809,7 @@ void Game::CheckCollision()
 {
     for (int i = 0; i < m_PhysicsObjects.size(); i++) for (int j = 0; j < m_ColliderObjects.size(); j++)
     {
-        if (m_PhysicsObjects[i]->Intersects(*m_ColliderObjects[j])) //std::cout << "Collision Detected!" << std::endl;
+        if (m_PhysicsObjects[i]->Intersects(*m_ColliderObjects[j])) 
         {
             XMFLOAT3 eject_vect = Collision::ejectionCMOGO(*m_PhysicsObjects[i], *m_ColliderObjects[j]);
             auto pos = m_PhysicsObjects[i]->GetPos();
@@ -781,7 +822,7 @@ void Game::CheckProjectileCollision()
 {
     for (int i = 0; i < m_PlayerProjectile.size(); i++) for (int j = 0; j < m_ColliderObjects.size(); j++)
     {
-        if (m_PlayerProjectile[i]->isactive() && m_PlayerProjectile[i]->Intersects(*m_ColliderObjects[j])) //std::cout << "Collision Detected!" << std::endl;
+        if (m_PlayerProjectile[i]->isactive() && m_PlayerProjectile[i]->Intersects(*m_ColliderObjects[j])) 
         {
             printf("AAAAAAAAAAAAAAAA");
             m_PlayerProjectile[i]->SetActive(false);
@@ -803,16 +844,64 @@ void Game::CheckPlayerCollision()
             m_PlayerObject[i]->SetAcceleration(Vector3(0.0F, 0.0f, 0.0f));
             lives -= 1;
             printf("%d\n", lives);
+
+            std::string livesStr = std::to_string(lives);
+
+            m_GameObjects2D.clear();
+
+            TextGO2D* text = new TextGO2D("lives = " + livesStr);
+            text->SetPos(Vector2(450, 10));
+            text->SetColour(Color((float*)&Colors::Yellow));
+            m_GameObjects2D.push_back(text);
             break;
+            
+        }
+    }
+}
 
-            
-                
-              
+void Game::ChecktargetCollision()
+{
+    for (int i = 0; i < m_PlayerObject.size(); i++) for (int j = 0; j < m_TargetObjects.size(); j++)
+    {
+        if ( m_TargetObjects[j]->isactive() && m_PlayerObject[i]->Intersects(*m_TargetObjects[j]))
+        {
+            XMFLOAT3 eject_vect = Collision::ejectionCMOGO(*m_PlayerObject[i], *m_TargetObjects[j]);
+            auto pos = m_PlayerObject[i]->GetPos();
+            m_PlayerObject[i]->SetPos(pos - eject_vect);
+        }
+    }
 
-            
+    for (int i = 0; i < m_PlayerProjectile.size(); i++) for (int j = 0; j < m_TargetObjects.size(); j++)
+    {
+        if (m_PlayerProjectile[i]->isactive() && m_TargetObjects[j]->isactive() && m_PlayerProjectile[i]->Intersects(*m_TargetObjects[j]))
+        {
+            printf("TARGET AQUIRED!!!!!!!!!!!!!!!!!!!!!");
+            m_PlayerProjectile[i]->SetActive(false);
+            m_TargetObjects[j]->SetActive(false);
+            move = true;
+        }
+    }
+}
 
+void Game::CheckWinCollision()
+{
+    for (int i = 0; i < m_PlayerObject.size(); i++) for (int j = 0; j < m_WinObject.size(); j++)
+    {
+        if (m_PlayerObject[i]->Intersects(*m_WinObject[j]))
+        {
+            XMFLOAT3 eject_vect = Collision::ejectionCMOGO(*m_PlayerObject[i], *m_WinObject[j]);
+           
+            printf("WIN");
+            m_PlayerObject[i]->SetPos(Vector3(0.0F, 30.0f, 50.0f));
+            m_PlayerObject[i]->SetAcceleration(Vector3(0.0F, 0.0f, 0.0f));
+            m_GD->m_GS = GS_WIN;
+           
             
-            
+        
+
+        
+        
+
         }
     }
 }

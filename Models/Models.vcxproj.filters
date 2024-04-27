@@ -23,5 +23,7 @@
     <MeshContentTask Include="floor\Floor.FBX" />
     <MeshContentTask Include="walls\Bluestone wall.fbx" />
     <MeshContentTask Include="ball\Ball FBX.fbx" />
+    <MeshContentTask Include="target\targhet.fbx" />
+    <MeshContentTask Include="glass cube.fbx" />
   </ItemGroup>
 </Project>
