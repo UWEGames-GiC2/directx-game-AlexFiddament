@@ -75,6 +75,7 @@ private:
 
     void OnDeviceLost();
     int lives = 3;
+    int score = 0;
     bool move = false;
 
 
@@ -123,7 +124,8 @@ private:
     std::vector<CMOGO*> m_ColliderObjects;
     std::vector<CMOGO*> m_PlayerObject;
     std::vector<CMOGO*> m_PhysicsObjects;
-    std::vector<CMOGO*> m_TargetObjects;
+    std::vector<CMOGO*> m_TargetObjects_move_wall;
+    std::vector<CMOGO*> m_TargetObjects_points;
     std::vector<CMOGO*> m_PlayerProjectile;
     std::vector<CMOGO*> m_WinObject;
     std::vector<Projectiles*> m_Projectile;
@@ -135,8 +137,10 @@ private:
     void CheckCollision();
     void CheckProjectileCollision();
     void CheckPlayerCollision();
-    void ChecktargetCollision();
+    void ChecktargetpointsCollision();
+    void ChecktargetmoveCollision();
     void CheckWinCollision();
+    void updatescreen();
 
 
                                          
