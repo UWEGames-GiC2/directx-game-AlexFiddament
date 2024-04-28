@@ -238,13 +238,25 @@ void Game::Initialize(HWND _window, int _width, int _height)
     m_GameObjects.push_back(terrain33);
     m_ColliderObjects.push_back(terrain33);
 
-    Terrain* target = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(50.0f, 30.0f, -10.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
-    m_GameObjects.push_back(target);
-    m_TargetObjects_move_wall.push_back(target);
 
-    Terrain* target1 = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(150.0f, 30.0f, 60.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    Terrain* target = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(135.0f, 30.0f, 60.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    m_GameObjects.push_back(target);
+    m_TargetObjects_points.push_back(target);
+
+    Terrain* target1 = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(135.0f, 30.0f, -160.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
     m_GameObjects.push_back(target1);
     m_TargetObjects_points.push_back(target1);
+
+
+
+    Terrain* targetmove1 = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(50.0f, 30.0f, -10.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    m_GameObjects.push_back(targetmove1);
+    m_TargetObjects_move_wall.push_back(targetmove1);
+
+
+    Terrain* targetmove2 = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(-10.0f, 30.0f, -10.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    m_GameObjects.push_back(targetmove2);
+    m_TargetObjects_move_wall.push_back(targetmove2);
 
     Terrain* end = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(60.0f, 30.0f, -80.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
     m_GameObjects.push_back(end);
@@ -253,6 +265,8 @@ void Game::Initialize(HWND _window, int _width, int _height)
     Terrain* terrainmove = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 0.0f, -200.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrainmove);
     m_ColliderObjects.push_back(terrainmove);
+
+    
 
    
    
@@ -305,6 +319,8 @@ void Game::Initialize(HWND _window, int _width, int _height)
     m_PlayerObject.push_back(pPlayer);
     pPlayer->SetPos(Vector3(0.0F, 30.0f, 50.0f));
     pPlayer->Projectiles = m_PlayerProjectile;
+    pPlayer->SetPitchYawRoll(0.0F, XMConvertToRadians(90), 0.0f);
+   
 
 
     
@@ -407,8 +423,8 @@ void Game::Update(DX::StepTimer const& _timer)
     {
         m_GD->m_GS = GS_GAME_OVER;
     }
+   
     
-
 
 }
 
@@ -512,6 +528,8 @@ void Game::Render()
         m_GameObjects2D.push_back(text);
         m_PlayerObject[0]->SetPos(Vector3(0.0F, 30.0f, 50.0f));
         m_PlayerObject[0]->SetAcceleration(Vector3(0.0F, 0.0f, 0.0f));
+        
+
 
         if (m_GD->m_KBS.Enter)
 
@@ -856,7 +874,6 @@ void Game::CheckProjectileCollision()
     {
         if (m_PlayerProjectile[i]->isactive() && m_PlayerProjectile[i]->Intersects(*m_ColliderObjects[j])) 
         {
-            printf("AAAAAAAAAAAAAAAA");
             m_PlayerProjectile[i]->SetActive(false);
             updatescreen();
         }
@@ -867,16 +884,15 @@ void Game::CheckPlayerCollision()
 {
     for (int i = 0; i < m_PlayerObject.size(); i++) for (int j = 0; j < m_ColliderObjects.size(); j++)
     {
-        if (m_PlayerObject[i]->Intersects(*m_ColliderObjects[j]))
+        if (m_ColliderObjects[j]->isactive() && m_PlayerObject[i]->Intersects(*m_ColliderObjects[j]))
         {
             XMFLOAT3 eject_vect = Collision::ejectionCMOGO(*m_PlayerObject[i], *m_ColliderObjects[j]);
             auto pos = m_PlayerObject[i]->GetPos();
             m_PlayerObject[i]->SetPos(pos - eject_vect);
-            printf("PLAYER");
             m_PlayerObject[i]->SetPos(Vector3(0.0F, 30.0f, 50.0f));
             m_PlayerObject[i]->SetAcceleration(Vector3(0.0F, 0.0f, 0.0f));
+            m_PlayerObject[0]->SetPitchYawRoll(0.0F, XMConvertToRadians(90), 0.0f);
             lives -= 1;
-            printf("%d\n", lives);
             updatescreen();
 
            
@@ -891,14 +907,9 @@ void Game::ChecktargetpointsCollision()
     for (int i = 0; i < m_PlayerObject.size(); i++) for (int j = 0; j < m_TargetObjects_points.size(); j++)
     {
         if (m_TargetObjects_points[j]->isactive() && m_PlayerObject[i]->Intersects(*m_TargetObjects_points[j]))
-        {
-            XMFLOAT3 eject_vect = Collision::ejectionCMOGO(*m_PlayerObject[i], *m_TargetObjects_points[j]);
-            auto pos = m_PlayerObject[i]->GetPos();
-            m_PlayerObject[i]->SetPos(pos - eject_vect);
-            printf("TARGET AQUIRED!!!!!!!!!!!!!!!!!!!!!");
+        { 
             m_TargetObjects_points[j]->SetActive(false);
             score += 1;
-            printf("%d\n", score);
             updatescreen();
         }
     }
@@ -906,12 +917,10 @@ void Game::ChecktargetpointsCollision()
     for (int i = 0; i < m_PlayerProjectile.size(); i++) for (int j = 0; j < m_TargetObjects_points.size(); j++)
     {
         if (m_PlayerProjectile[i]->isactive() && m_TargetObjects_points[j]->isactive() && m_PlayerProjectile[i]->Intersects(*m_TargetObjects_points[j]))
-        {
-            printf("TARGET AQUIRED!!!!!!!!!!!!!!!!!!!!!");
+        {   
             m_PlayerProjectile[i]->SetActive(false);
             m_TargetObjects_points[j]->SetActive(false);
             score += 1;
-            printf("%d\n", score);
             updatescreen();
             
         }
@@ -924,15 +933,16 @@ void Game::ChecktargetmoveCollision()
     {
         if (m_TargetObjects_move_wall[j]->isactive() && m_PlayerObject[i]->Intersects(*m_TargetObjects_move_wall[j]))
         {
-            XMFLOAT3 eject_vect = Collision::ejectionCMOGO(*m_PlayerObject[i], *m_TargetObjects_move_wall[j]);
-            auto pos = m_PlayerObject[i]->GetPos();
-            m_PlayerObject[i]->SetPos(pos - eject_vect);
-            printf("TARGET AQUIRED!!!!!!!!!!!!!!!!!!!!!");
             m_TargetObjects_move_wall[j]->SetActive(false);
             score += 1;
-            printf("%d\n", score);
             move = true;
             updatescreen();
+            TextGO2D* wallmovedtext = new TextGO2D("a wall somewhere has moved...");
+            wallmovedtext->SetPos(Vector2(300, 200));
+            wallmovedtext->SetColour(Color((float*)&Colors::Black));
+            m_GameObjects2D.push_back(wallmovedtext);
+            
+           
         }
     }
 
@@ -940,13 +950,17 @@ void Game::ChecktargetmoveCollision()
     {
         if (m_PlayerProjectile[i]->isactive() && m_TargetObjects_move_wall[j]->isactive() && m_PlayerProjectile[i]->Intersects(*m_TargetObjects_move_wall[j]))
         {
-            printf("TARGET AQUIRED!!!!!!!!!!!!!!!!!!!!!");
+            
             m_PlayerProjectile[i]->SetActive(false);
             m_TargetObjects_move_wall[j]->SetActive(false);
             score += 1;
-            printf("%d\n", score);
             move = true;
             updatescreen();
+            TextGO2D* wallmovedtext = new TextGO2D("a wall somewhere has moved...");
+            wallmovedtext->SetPos(Vector2(100, 200));
+            wallmovedtext->SetColour(Color((float*)&Colors::Black));
+            m_GameObjects2D.push_back(wallmovedtext);
+            
         }
     }
 }
@@ -965,6 +979,7 @@ void Game::CheckWinCollision()
             printf("WIN");
             m_PlayerObject[i]->SetPos(Vector3(0.0F, 30.0f, 50.0f));
             m_PlayerObject[i]->SetAcceleration(Vector3(0.0F, 0.0f, 0.0f));
+            m_PlayerObject[0]->SetPitchYawRoll(0.0F, XMConvertToRadians(90), 0.0f);
             m_GD->m_GS = GS_WIN;
            
             

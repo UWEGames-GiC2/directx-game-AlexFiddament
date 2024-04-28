@@ -76,6 +76,7 @@ private:
     void OnDeviceLost();
     int lives = 3;
     int score = 0;
+    
     bool move = false;
 
 
