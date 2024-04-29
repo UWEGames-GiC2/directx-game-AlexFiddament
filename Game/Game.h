@@ -76,8 +76,10 @@ private:
     void OnDeviceLost();
     int lives = 3;
     int score = 0;
+    int mover = 0;
     
     bool move = false;
+    
 
 
     // Device resources.
@@ -141,6 +143,7 @@ private:
     void ChecktargetpointsCollision();
     void ChecktargetmoveCollision();
     void CheckWinCollision();
+    void screenupdater();
     void updatescreen();
 
 
