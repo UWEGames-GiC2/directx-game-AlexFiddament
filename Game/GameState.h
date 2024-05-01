@@ -11,6 +11,8 @@ enum GameState {
 	GS_GAME_OVER,
 	GS_PLAY_FIRST_PERSON_CAM,
 	GS_WIN,
+	GS_Menu,
+
 	GS_COUNT
 };
 
