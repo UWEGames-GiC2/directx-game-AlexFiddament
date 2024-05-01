@@ -134,21 +134,21 @@ private:
 
     std::shared_ptr<firstpersoncam> m_FPScam = nullptr;
 
-    std::vector<std::shared_ptr<GameObject>> m_ColliderObjects;
+    std::vector<std::shared_ptr<CMOGO>> m_ColliderObjects;
 
-    std::vector<std::shared_ptr<GameObject>> m_TargetObjects_points;
+    std::vector<std::shared_ptr<CMOGO>> m_TargetObjects_points;
 
-    std::vector<std::shared_ptr<GameObject>> m_TargetObjects_move_wall;
+    std::vector<std::shared_ptr<CMOGO>> m_TargetObjects_move_wall;
 
-    std::vector<std::shared_ptr<GameObject>> m_WinObject;
+    std::vector<std::shared_ptr<CMOGO>> m_WinObject;
 
-    std::vector<std::shared_ptr<GameObject>> m_PlayerProjectile;
+    std::vector<std::shared_ptr<Projectiles>> m_PlayerProjectile;
 
-    std::vector<std::shared_ptr<GameObject>> m_Projectile;
+    std::vector<std::shared_ptr<CMOGO>> m_Projectile;
 
-    std::vector<std::shared_ptr<GameObject>> m_PhysicsObjects;
+    std::vector<std::shared_ptr<CMOGO>> m_PhysicsObjects;
 
-    std::vector<std::shared_ptr<GameObject>> m_PlayerObject;
+    std::vector<std::shared_ptr<CMOGO>> m_PlayerObject;
    
     
 

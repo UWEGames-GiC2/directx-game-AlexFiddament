@@ -376,12 +376,12 @@ void Game::Initialize(HWND _window, int _width, int _height)
 
 
     //create a base camera
-    auto m_cam = std::make_shared<Camera>(0.25f * XM_PI, AR, 1.0f, 10000.0f, Vector3::UnitY, Vector3::Zero);
+    std::shared_ptr<Camera> m_cam = m_cam = std::make_shared<Camera>(0.25f * XM_PI, AR, 1.0f, 10000.0f, Vector3::UnitY, Vector3::Zero);
     m_cam->SetPos(Vector3(50.0f, 5000.0f, 5000.0f));
     m_GameObjects.push_back(m_cam);
 
     //add a secondary camera
-    auto m_TPScam = std::make_shared<TPSCamera>(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(50.0f, 50000.0f, 50000.0f));
+    std::shared_ptr<Camera> m_TPScam =  m_TPScam = std::make_shared<TPSCamera>(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(50.0f, 50000.0f, 50000.0f));
     m_GameObjects.push_back(m_TPScam);
 
    //m_firstpersoncam = new firstpersoncam(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 0.0f, 0.0f));
@@ -522,11 +522,12 @@ void Game::Update(DX::StepTimer const& _timer)
     if (m_GD->m_GS == GS_Menu)
     {
         updatescreen();
-        TextGO2D* text = new TextGO2D("welcome to the game\nnaivgate the changing maze but you are constanly falling!\nuse lmb to give a boost in height and space to shoot\nmake sure you dont hit the walls or you lose a life\nloose all three and your out!\nshoot the boxes to gain points\nsome will move walls some will only give points\nonly once you have six points the final wall will open\nmake it back to the start to win\ngood luck!  ");
+        auto text = std::make_shared<TextGO2D>("welcome to the game\nnaivgate the changing maze but you are constanly falling!\nuse lmb to give a boost in height and space to shoot\nmake sure you dont hit the walls or you lose a life\nloose all three and your out!\nshoot the boxes to gain points\nsome will move walls some will only give points\nonly once you have six points the final wall will open\nmake it back to the start to win\ngood luck!  ");
         text->SetPos(Vector2(50, 100));
         text->SetColour(Color((float*)&Colors::Black));
         text->SetScale(0.7f);
-        TextGO2D* text1 = new TextGO2D(" Press Enter to start ");
+
+        auto text1 = std::make_shared<TextGO2D>(" Press Enter to start ");
         text1->SetPos(Vector2(350, 470));
         text1->SetColour(Color((float*)&Colors::Black));
         
@@ -547,7 +548,7 @@ void Game::Update(DX::StepTimer const& _timer)
     if (m_GD->m_GS == GS_GAME_OVER)
     {
         updatescreen();
-        TextGO2D* text = new TextGO2D("you lose! \npress space to play again?");
+        auto text = std::make_shared<TextGO2D>("you lose! \npress space to play again?");
         text->SetPos(Vector2(300, 300));
         text->SetColour(Color((float*)&Colors::Black));
         m_GameObjects2D.push_back(text);
@@ -594,7 +595,7 @@ void Game::Update(DX::StepTimer const& _timer)
     if (m_GD->m_GS == GS_WIN)
     {
         updatescreen();
-        TextGO2D* text = new TextGO2D("You Win! \npress space to play again?");
+        auto text = std::make_shared<TextGO2D>("You Win! \npress space to play again?");
         text->SetPos(Vector2(300, 300));
         text->SetColour(Color((float*)&Colors::Black));
         m_GameObjects2D.push_back(text);
@@ -699,7 +700,7 @@ void Game::Render()
     if (m_GD->m_GS == GS_GAME_OVER)
     {
         
-        TextGO2D* text = new TextGO2D("You lose!");
+        auto text = std::make_shared<TextGO2D>("You lose!");
         text->SetPos(Vector2(300, 300));
         text->SetColour(Color((float*)&Colors::Black));
         m_GameObjects2D.push_back(text);
@@ -745,7 +746,7 @@ void Game::Render()
     if (m_GD->m_GS == GS_WIN)
     {
         m_GameObjects2D.clear();
-        TextGO2D* text = new TextGO2D("You Win! \npress enter to play again?");
+        auto text = std::make_shared<TextGO2D>("You Win! \npress enter to play again?");
         text->SetPos(Vector2(300, 300));
         text->SetColour(Color((float*)&Colors::Black));
         m_GameObjects2D.push_back(text);
@@ -1194,7 +1195,7 @@ void Game::ChecktargetmoveCollision()
             
             
             updatescreen();
-            TextGO2D* wallmovedtext = new TextGO2D("a wall somewhere has moved...");
+            auto wallmovedtext = std::make_shared<TextGO2D>("a wall somewhere has moved...");
             wallmovedtext->SetPos(Vector2(100, 200));
             wallmovedtext->SetColour(Color((float*)&Colors::Black));
             m_GameObjects2D.push_back(wallmovedtext);
@@ -1226,7 +1227,7 @@ void Game::ChecktargetmoveCollision()
 
            
             updatescreen();
-            TextGO2D* wallmovedtext = new TextGO2D("a wall somewhere has moved...");
+            auto wallmovedtext = std::make_shared<TextGO2D>("a wall somewhere has moved...");
             wallmovedtext->SetPos(Vector2(100, 200));
             wallmovedtext->SetColour(Color((float*)&Colors::Black));
             m_GameObjects2D.push_back(wallmovedtext);
@@ -1300,12 +1301,13 @@ void Game::updatescreen()
 
     
 
-    TextGO2D* text = new TextGO2D("lives = " + livesStr);
+    auto text = std::make_shared<TextGO2D>("lives = " + livesStr);
     text->SetPos(Vector2(450, 10));
     text->SetColour(Color((float*)&Colors::Yellow));
     m_GameObjects2D.push_back(text);
 
-    TextGO2D* text1 = new TextGO2D("score = " + scoreStr);
+    auto text1 = std::make_shared<TextGO2D>("score = " + scoreStr);
+
     text1->SetPos(Vector2(440, 50));
     text1->SetColour(Color((float*)&Colors::Yellow));
     m_GameObjects2D.push_back(text1);

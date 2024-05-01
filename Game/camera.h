@@ -16,7 +16,8 @@ public:
 
 	virtual void Tick(GameData* _GD) override;
 
-	virtual void Draw(DrawData* _DD) override;
+	virtual void Draw(std::shared_ptr<DrawData> _DD);
+
 
 	//Getters
 	Matrix GetProj() { return m_projMat; }

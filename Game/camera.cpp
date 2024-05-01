@@ -31,7 +31,7 @@ void Camera::Tick(GameData* _GD)
 	GameObject::Tick(_GD);
 }
 
-void Camera::Draw(DrawData* _DD)
+void Camera::Draw(std::shared_ptr<DrawData> _DD)
 {
 	_DD;
 	//standard camera doesn't draw ANYTHING
