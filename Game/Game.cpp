@@ -376,12 +376,12 @@ void Game::Initialize(HWND _window, int _width, int _height)
 
 
     //create a base camera
-    std::shared_ptr<Camera> m_cam = m_cam = std::make_shared<Camera>(0.25f * XM_PI, AR, 1.0f, 10000.0f, Vector3::UnitY, Vector3::Zero);
+    std::shared_ptr<Camera> m_cam =  std::make_shared<Camera>(0.25f * XM_PI, AR, 1.0f, 10000.0f, Vector3::UnitY, Vector3::Zero);
     m_cam->SetPos(Vector3(50.0f, 5000.0f, 5000.0f));
     m_GameObjects.push_back(m_cam);
 
     //add a secondary camera
-    std::shared_ptr<Camera> m_TPScam =  m_TPScam = std::make_shared<TPSCamera>(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(50.0f, 50000.0f, 50000.0f));
+    std::shared_ptr<TPSCamera>  m_TPScam = std::make_shared<TPSCamera>(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(50.0f, 50000.0f, 50000.0f));
     m_GameObjects.push_back(m_TPScam);
 
    //m_firstpersoncam = new firstpersoncam(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 0.0f, 0.0f));
@@ -455,11 +455,11 @@ void Game::Update(DX::StepTimer const& _timer)
     
 
     //update all objects
-    for (list<GameObject*>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
+    for (std::list<std::shared_ptr<GameObject>>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
     {
         (*it)->Tick(m_GD);
     }
-    for (list<GameObject2D*>::iterator it = m_GameObjects2D.begin(); it != m_GameObjects2D.end(); it++)
+    for (std::list<std::shared_ptr<GameObject2D>>::iterator it = m_GameObjects2D.begin(); it != m_GameObjects2D.end(); it++)
     {
         (*it)->Tick(m_GD);
     }
@@ -670,7 +670,7 @@ void Game::Render()
     VBGO::UpdateConstantBuffer(m_DD);
 
     //Draw 3D Game Obejects
-    for (list<GameObject*>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
+    for (std::list<std::shared_ptr<GameObject>>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
     {
         if ((*it)->isactive())
         {
@@ -683,7 +683,7 @@ void Game::Render()
 
     // Draw sprite batch stuff 
     m_DD2D->m_Sprites->Begin(SpriteSortMode_Deferred, m_states->NonPremultiplied());
-    for (list<GameObject2D*>::iterator it = m_GameObjects2D.begin(); it != m_GameObjects2D.end(); it++)
+    for (std::list<std::shared_ptr<GameObject2D>>::iterator it = m_GameObjects2D.begin(); it != m_GameObjects2D.end(); it++)
     {
 
 
@@ -1307,7 +1307,6 @@ void Game::updatescreen()
     m_GameObjects2D.push_back(text);
 
     auto text1 = std::make_shared<TextGO2D>("score = " + scoreStr);
-
     text1->SetPos(Vector2(440, 50));
     text1->SetColour(Color((float*)&Colors::Yellow));
     m_GameObjects2D.push_back(text1);

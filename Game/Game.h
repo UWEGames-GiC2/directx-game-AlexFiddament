@@ -109,9 +109,9 @@ private:
     DrawData2D* m_DD2D = NULL;	    //Data to be passed by game to all 2D Game Objects via Draw 
 
     //Basic 3D renderers
-    Camera* m_cam = NULL; //principle camera
+    std::shared_ptr<Camera> m_cam = nullptr;
     TPSCamera* m_TPScam = NULL;//TPS cam
-    firstpersoncam* m_firstpersoncam = NULL;
+    std::shared_ptr<firstpersoncam> m_firstpersoncam = nullptr;
     Light* m_light = NULL; //base light
 
     //required for the CMO model rendering system
@@ -142,7 +142,7 @@ private:
 
     std::vector<std::shared_ptr<CMOGO>> m_WinObject;
 
-    std::vector<std::shared_ptr<Projectiles>> m_PlayerProjectile;
+    std::vector<std::shared_ptr<CMOGO>> m_PlayerProjectile;
 
     std::vector<std::shared_ptr<CMOGO>> m_Projectile;
 

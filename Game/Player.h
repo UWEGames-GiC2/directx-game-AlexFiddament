@@ -15,7 +15,7 @@ public:
 
 	virtual void Tick(GameData* _GD) override;
 
-	std::shared_ptr<Projectiles> Projectiles;
+	std::vector<std::shared_ptr<CMOGO>> Projectiles;
 
 protected:
 	
