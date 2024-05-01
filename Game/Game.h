@@ -121,22 +121,43 @@ private:
     //basic keyboard and mouse input system
     void ReadInput(); //Get current Mouse and Keyboard states
     std::unique_ptr<DirectX::Keyboard> m_keyboard;
+
     std::unique_ptr<DirectX::Mouse> m_mouse;
 
-    list<GameObject*> m_GameObjects; //data structure to hold pointers to the 3D Game Objects
-    list<GameObject2D*> m_GameObjects2D; //data structure to hold pointers to the 2D Game Objects 
+    std::list<std::shared_ptr<GameObject>> m_GameObjects; //data structure to hold pointers to the 3D Game Objects
+
+    std::list<std::shared_ptr<GameObject2D>> m_GameObjects2D;  //data structure to hold pointers to the 2D Game Objects 
 
     //list<CMOGO*> m_CMOGameObjects; //data structure to hold pointers to all 3D CMO Game Objects
     //list<CMOGO*> m_PhysicsObjects
 
-    std::vector<CMOGO*> m_ColliderObjects;
-    std::vector<CMOGO*> m_PlayerObject;
-    std::vector<CMOGO*> m_PhysicsObjects;
-    std::vector<CMOGO*> m_TargetObjects_move_wall;
-    std::vector<CMOGO*> m_TargetObjects_points;
-    std::vector<CMOGO*> m_PlayerProjectile;
-    std::vector<CMOGO*> m_WinObject;
-    std::vector<Projectiles*> m_Projectile;
+
+    std::shared_ptr<firstpersoncam> m_FPScam = nullptr;
+
+    std::vector<std::shared_ptr<GameObject>> m_ColliderObjects;
+
+    std::vector<std::shared_ptr<GameObject>> m_TargetObjects_points;
+
+    std::vector<std::shared_ptr<GameObject>> m_TargetObjects_move_wall;
+
+    std::vector<std::shared_ptr<GameObject>> m_WinObject;
+
+    std::vector<std::shared_ptr<GameObject>> m_PlayerProjectile;
+
+    std::vector<std::shared_ptr<GameObject>> m_Projectile;
+
+    std::vector<std::shared_ptr<GameObject>> m_PhysicsObjects;
+
+    std::vector<std::shared_ptr<GameObject>> m_PlayerObject;
+   
+    
+
+    
+    
+    
+    
+   
+    
     
     
     

@@ -90,7 +90,7 @@ void Game::Initialize(HWND _window, int _width, int _height)
     //create a set of dummy things to show off the engine
 
     //create a base light
-    m_light = new Light(Vector3(0.0f, 100.0f, 160.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.4f, 0.1f, 0.1f, 1.0f));
+    auto m_light = std::make_shared<Light>(Vector3(0.0f, 100.0f, 160.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.4f, 0.1f, 0.1f, 1.0f));
     m_GameObjects.push_back(m_light);
 
     //find how big my window is to correctly calculate my aspect ratio
@@ -107,206 +107,206 @@ void Game::Initialize(HWND _window, int _width, int _height)
     
 
     
-    Terrain* terrain0 = new Terrain("Floor", m_d3dDevice.Get(), m_fxFactory, Vector3(0.0f, 50.0f, -70.0f), 0.0f, 0.0f, 0.0f, 4.5f * Vector3::One);
+    std::shared_ptr<Terrain> terrain0 = std::make_shared<Terrain>("Floor", m_d3dDevice.Get(), m_fxFactory, Vector3(0.0f, 50.0f, -70.0f), 0.0f, 0.0f, 0.0f, 4.5f * Vector3::One);
     m_GameObjects.push_back(terrain0);
     m_ColliderObjects.push_back(terrain0);
 
-    Terrain* terrain = new Terrain("Floor", m_d3dDevice.Get(), m_fxFactory, Vector3(0.0f, 0.0f, -70.0f), 0.0f, 0.0f, 0.0f, 4.5f * Vector3::One);
+    std::shared_ptr<Terrain> terrain = std::make_shared<Terrain>("Floor", m_d3dDevice.Get(), m_fxFactory, Vector3(0.0f, 0.0f, -70.0f), 0.0f, 0.0f, 0.0f, 4.5f * Vector3::One);
     m_GameObjects.push_back(terrain);
     m_ColliderObjects.push_back(terrain);
 
-    Terrain* terrain1 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain1 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain1);
     m_ColliderObjects.push_back(terrain1);
 
-    Terrain* terrain2 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain2 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain2);
     m_ColliderObjects.push_back(terrain2);
 
-    Terrain* terrain3 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain3 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain3);
     m_ColliderObjects.push_back(terrain3);
 
-    Terrain* terrain4 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain4 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain4);
     m_ColliderObjects.push_back(terrain4);
 
-    Terrain* terrain5 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain5 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain5);
     m_ColliderObjects.push_back(terrain5);
 
-    Terrain* terrain6 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, 25.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain6 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, 25.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain6);
     m_ColliderObjects.push_back(terrain6);
 
-    Terrain* terrain7 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -50.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain7 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -50.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain7);
     m_ColliderObjects.push_back(terrain7);
 
-    Terrain* terrain8 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -125.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain8 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -125.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain8);
     m_ColliderObjects.push_back(terrain8);
 
-    Terrain* terrain9 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -200.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain9 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -200.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain9);
     m_ColliderObjects.push_back(terrain9);
 
-    Terrain* terrain10 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain10 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(175.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain10);
     m_ColliderObjects.push_back(terrain10);
 
-    Terrain* terrain11 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain11 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain11);
     m_ColliderObjects.push_back(terrain11);
 
-    Terrain* terrain12 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain12 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain12);
     m_ColliderObjects.push_back(terrain12);
 
-    Terrain* terrain13 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain13 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -275.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain13);
     m_ColliderObjects.push_back(terrain13);
 
-    Terrain* terrain15 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -50.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain15 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -50.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain15);
     m_ColliderObjects.push_back(terrain15);
 
-    Terrain* terrain16 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, 25.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain16 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, 25.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain16);
     m_ColliderObjects.push_back(terrain16);
 
-    Terrain* terrain17 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -125.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain17 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -125.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain17);
     m_ColliderObjects.push_back(terrain17);
 
-    Terrain* terrain18 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -200.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain18 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, -200.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain18);
     m_ColliderObjects.push_back(terrain18);
 
-    Terrain* terrain19 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 25.0f, 25.0f), 0.0f, XMConvertToRadians(90), XMConvertToRadians(180), 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain19 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 25.0f, 25.0f), 0.0f, XMConvertToRadians(90), XMConvertToRadians(180), 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain19);
     m_ColliderObjects.push_back(terrain19);
 
-    Terrain* terrain20 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 0.0f, 25.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain20 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 0.0f, 25.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain20);
     m_ColliderObjects.push_back(terrain20);
 
-    Terrain* terrain21 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, 25.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain21 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, 25.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain21);
     m_ColliderObjects.push_back(terrain21);
 
-    Terrain* terrain22 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, -50.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain22 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, -50.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain22);
     m_ColliderObjects.push_back(terrain22);
 
-    Terrain* terrain23 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 25.0f, -50.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain23 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 25.0f, -50.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain23);
     m_ColliderObjects.push_back(terrain23);
 
-    Terrain* terrain25 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 25.0f, -50.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain25 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 25.0f, -50.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain25);
     m_ColliderObjects.push_back(terrain25);
 
-    Terrain* terrain26 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 25.0f, -125.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain26 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 25.0f, -125.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain26);
     m_ColliderObjects.push_back(terrain26);
 
-    Terrain* terrain27 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 25.0f, -125.0f), 0.0f, 0.0f, XMConvertToRadians(180), 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain27 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 25.0f, -125.0f), 0.0f, 0.0f, XMConvertToRadians(180), 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain27);
     m_ColliderObjects.push_back(terrain27);
 
-    Terrain* terrain28 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0F, 0.0f, -125.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain28 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0F, 0.0f, -125.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain28);
     m_ColliderObjects.push_back(terrain28);
 
-    Terrain* terrain29 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0F, 0.0f, -50.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain29 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0F, 0.0f, -50.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain29);
     m_ColliderObjects.push_back(terrain29);
 
-    Terrain* terrain30 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0F, 0.0f, 25.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain30 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0F, 0.0f, 25.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain30);
     m_ColliderObjects.push_back(terrain30);
 
-    Terrain* terrain31 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0F, 0.0f, -125.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain31 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0F, 0.0f, -125.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain31);
     m_ColliderObjects.push_back(terrain31);
 
-    Terrain* terrain32 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0F, 0.0f, -50.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain32 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0F, 0.0f, -50.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain32);
     m_ColliderObjects.push_back(terrain32);
 
-    Terrain* terrain33 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 25.0f, -200.0f), 0.0f, 0.0f, XMConvertToRadians(180), 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain33 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 25.0f, -200.0f), 0.0f, 0.0f, XMConvertToRadians(180), 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain33);
     m_ColliderObjects.push_back(terrain33);
 
     
 
 
-    Terrain* target = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(135.0f, 30.0f, 60.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    std::shared_ptr<Terrain> target = std::make_shared<Terrain>("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(135.0f, 30.0f, 60.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
     m_GameObjects.push_back(target);
     m_TargetObjects_points.push_back(target);
 
-    Terrain* target1 = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(135.0f, 30.0f, -160.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    std::shared_ptr<Terrain> target1 = std::make_shared<Terrain>("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(135.0f, 30.0f, -160.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
     m_GameObjects.push_back(target1);
     m_TargetObjects_points.push_back(target1);
 
-    Terrain* targetmove = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(60.0f, 30.0f, 60.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    std::shared_ptr<Terrain> targetmove = std::make_shared<Terrain>("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(60.0f, 30.0f, 60.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
     m_GameObjects.push_back(targetmove);
     m_TargetObjects_move_wall.push_back(targetmove);
 
-    Terrain* targetmove1 = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(50.0f, 30.0f, -10.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    std::shared_ptr<Terrain> targetmove1 = std::make_shared<Terrain>("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(50.0f, 30.0f, -10.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
     m_GameObjects.push_back(targetmove1);
     m_TargetObjects_move_wall.push_back(targetmove1);
 
 
-    Terrain* targetmove2 = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(-10.0f, 30.0f, -10.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    std::shared_ptr<Terrain> targetmove2 = std::make_shared<Terrain>("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(-10.0f, 30.0f, -10.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
     m_GameObjects.push_back(targetmove2);
     m_TargetObjects_move_wall.push_back(targetmove2);
 
 
-    Terrain* targetmove3 = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(60.0f, 30.0f, -80.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    std::shared_ptr<Terrain> targetmove3 = std::make_shared<Terrain>("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(60.0f, 30.0f, -80.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
     m_GameObjects.push_back(targetmove3);
     m_TargetObjects_move_wall.push_back(targetmove3);
 
     
 
-    Terrain* terrainmove = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 0.0f, -200.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrainmove = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 0.0f, -200.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrainmove);
     m_ColliderObjects.push_back(terrainmove);
 
 
 
-    Terrain* terrain34 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0F, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain34 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0F, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain34);
     m_ColliderObjects.push_back(terrain34);
 
-    Terrain* terrainmove1 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, -200.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrainmove1 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(25.0f, 0.0f, -200.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrainmove1);
     m_ColliderObjects.push_back(terrainmove1);
    
 
 
-    Terrain* end = new Terrain("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(- 100.0f, 30.0f, 65.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
+    std::shared_ptr<Terrain> end = std::make_shared<Terrain>("glass cube", m_d3dDevice.Get(), m_fxFactory, Vector3(- 100.0f, 30.0f, 65.0f), 0.0f, 0.0f, 0.0f, 0.07f * Vector3::One);
     m_GameObjects.push_back(end);
     m_WinObject.push_back(end);
 
-    Terrain* terrain35 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 25.0f, -200.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain35 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0f, 25.0f, -200.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain35);
     m_ColliderObjects.push_back(terrain35);
 
-    Terrain* terrain36 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 25.0f, -125.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain36 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(100.0f, 25.0f, -125.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain36);
     m_ColliderObjects.push_back(terrain36);
 
-    Terrain* terrain37 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-125.0F, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain37 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-125.0F, 0.0f, 100.0f), 0.0f, XMConvertToRadians(90), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain37);
     m_ColliderObjects.push_back(terrain37);
 
-    Terrain* terrain38 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, 100.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain38 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-50.0F, 0.0f, 100.0f), 0.0f, XMConvertToRadians(180), 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain38);
     m_ColliderObjects.push_back(terrain38);
 
-    Terrain* terrain39 = new Terrain("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-125.0F, 0.0f, 25.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
+    std::shared_ptr<Terrain> terrain39 = std::make_shared<Terrain>("Bluestone wall", m_d3dDevice.Get(), m_fxFactory, Vector3(-125.0F, 0.0f, 25.0f), 0.0f, 0.0f, 0.0f, 0.20f * Vector3::One);
     m_GameObjects.push_back(terrain39);
     m_ColliderObjects.push_back(terrain39);
    
@@ -318,14 +318,16 @@ void Game::Initialize(HWND _window, int _width, int _height)
    
     std::string livesStr = std::to_string(lives);
   
-    TextGO2D* text = new TextGO2D("lives = " + livesStr);
+    auto text = std::make_shared<TextGO2D>("lives = " + livesStr);
+
     text->SetPos(Vector2(450, 10));
     text->SetColour(Color((float*)&Colors::Yellow));
     m_GameObjects2D.push_back(text);
 
     std::string scoreStr = std::to_string(score);
 
-    TextGO2D* text1 = new TextGO2D("score = " + scoreStr);
+    
+    auto text1 = std::make_shared<TextGO2D>("lives = " + scoreStr);
     text1->SetPos(Vector2(440, 50));
     text1->SetColour(Color((float*)&Colors::Yellow));
     m_GameObjects2D.push_back(text1);
@@ -350,7 +352,7 @@ void Game::Initialize(HWND _window, int _width, int _height)
   
     for (size_t i = 0; i < 10; i++)
     {
-        Projectiles* pProjectile = new Projectiles("Ball FBX", m_d3dDevice.Get(), m_fxFactory);
+        auto pProjectile = std::make_shared<Projectiles>("Ball FBX", m_d3dDevice.Get(), m_fxFactory);
         pProjectile->SetActive(false);
         m_GameObjects.push_back(pProjectile);
         m_PlayerProjectile.push_back(pProjectile);
@@ -359,7 +361,7 @@ void Game::Initialize(HWND _window, int _width, int _height)
 
 
     //add Player
-    Player* pPlayer = new Player("BirdModelV1", m_d3dDevice.Get(), m_fxFactory);
+    auto pPlayer = std::make_shared<Player>("BirdModelV1", m_d3dDevice.Get(), m_fxFactory);
     pPlayer->SetScale(0.40f, 0.40f, 0.40f);
     m_GameObjects.push_back(pPlayer);
     m_PlayerObject.push_back(pPlayer);
@@ -374,18 +376,21 @@ void Game::Initialize(HWND _window, int _width, int _height)
 
 
     //create a base camera
-    m_cam = new Camera(0.25f * XM_PI, AR, 1.0f, 10000.0f, Vector3::UnitY, Vector3::Zero);
+    auto m_cam = std::make_shared<Camera>(0.25f * XM_PI, AR, 1.0f, 10000.0f, Vector3::UnitY, Vector3::Zero);
     m_cam->SetPos(Vector3(50.0f, 5000.0f, 5000.0f));
     m_GameObjects.push_back(m_cam);
 
     //add a secondary camera
-    m_TPScam = new TPSCamera(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(50.0f, 50000.0f, 50000.0f));
+    auto m_TPScam = std::make_shared<TPSCamera>(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(50.0f, 50000.0f, 50000.0f));
     m_GameObjects.push_back(m_TPScam);
 
-   m_firstpersoncam = new firstpersoncam(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 0.0f, 0.0f));
-   m_GameObjects.push_back(m_firstpersoncam);
+   //m_firstpersoncam = new firstpersoncam(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 0.0f, 0.0f));
 
-    //std::shared_ptr<firstpersoncam>
+   std::shared_ptr<firstpersoncam> m_fpscam = std::make_shared<firstpersoncam>(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 0.0f, 0.0f));
+
+   m_GameObjects.push_back(m_fpscam);
+
+    
 
    
     
