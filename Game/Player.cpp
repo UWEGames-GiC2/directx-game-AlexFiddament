@@ -3,6 +3,7 @@
 #include <dinput.h>
 #include "GameData.h"
 
+
 Player::Player(string _fileName, ID3D11Device* _pd3dDevice, IEffectFactory* _EF) : CMOGO(_fileName, _pd3dDevice, _EF)
 {
 	//any special set up for Player goes here
@@ -12,6 +13,7 @@ Player::Player(string _fileName, ID3D11Device* _pd3dDevice, IEffectFactory* _EF)
 
 	SetDrag(0.7);
 	SetPhysicsOn(true);
+	
 }
 
 Player::~Player()
@@ -106,23 +108,27 @@ void Player::Tick(GameData* _GD)
 		}
 		if (_GD->m_KBS_tracker.pressed.Space)
 		{
+			
+
 			for (size_t i = 0; i < Projectiles.size(); i++)
 			{
-				if (!Projectiles[i]->isactive())
+				if (!Projectiles[i]->isactive() )
 				{
-					printf("fired");
-
+					
+					
+					Projectiles[i]->SetPos(this->GetPos());
 					Vector3 forwardMove = 40.0f * Vector3::Forward;
 					Matrix rotYaw = Matrix::CreateRotationY(this->GetYaw() + XMConvertToRadians(180));
 					Matrix rotPitch = Matrix::CreateRotationX(-this->GetPitch());
 					Matrix rotMove = rotPitch * rotYaw;
 					forwardMove = Vector3::Transform(forwardMove, rotMove);
-					Projectiles[i]->SetPos(this->GetPos());
 					Projectiles[i]->SetActive(true);
 					Projectiles[i]->SetYaw(this->GetYaw());
 					Projectiles[i]->SetDrag(0.01f);
 					Projectiles[i]->SetPhysicsOn(true);
 					Projectiles[i]->SetAcceleration(forwardMove * 1000.0f);
+
+					
 
 
 					break;
@@ -141,10 +147,7 @@ void Player::Tick(GameData* _GD)
 	}
 	}
 
-	if (_GD->m_KBS.Enter)
-	{
-		SetPos(Vector3(0.0F, 30.0f, 50.0f));
-	}
+	
 
 
    

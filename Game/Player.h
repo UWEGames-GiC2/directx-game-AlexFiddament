@@ -18,7 +18,7 @@ public:
 	vector<CMOGO*> Projectiles;
 
 protected:
-
+	
 };
 
 #endif

@@ -74,11 +74,16 @@ private:
     void CreateResources();
 
     void OnDeviceLost();
+
+
     int lives = 3;
     int score = 0;
     int mover = 0;
-    
     bool move = false;
+    
+
+
+    Vector3 spawn;
     
 
 
