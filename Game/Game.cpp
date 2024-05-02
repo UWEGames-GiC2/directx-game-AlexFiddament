@@ -390,15 +390,14 @@ void Game::Initialize(HWND _window, int _width, int _height)
 
    m_GameObjects.push_back(m_fpscam);
 
+  
+
     
 
    
     
     
-    if (GS_GAME_OVER)
-    {
-        
-    }
+   
 
   
 
@@ -409,8 +408,8 @@ void Game::Initialize(HWND _window, int _width, int _height)
     m_DD = new DrawData;
     m_DD->m_pd3dImmediateContext = nullptr;
     m_DD->m_states = m_states;
-    m_DD->m_cam = m_cam.get();
-    m_DD->m_light = m_light.get();
+    m_DD->m_cam = m_cam;
+    m_DD->m_light = m_light;
 
     
 }
@@ -429,6 +428,7 @@ void Game::Tick()
 // Updates the world.
 void Game::Update(DX::StepTimer const& _timer)
 {
+    
     float elapsedTime = float(_timer.GetElapsedSeconds());
     m_GD->m_dt = elapsedTime;
 
@@ -464,6 +464,8 @@ void Game::Update(DX::StepTimer const& _timer)
         (*it)->Tick(m_GD);
     }
 
+    
+
     CheckCollision();
     CheckProjectileCollision();
     CheckPlayerCollision();
@@ -471,6 +473,8 @@ void Game::Update(DX::StepTimer const& _timer)
     ChecktargetmoveCollision();
     CheckWinCollision();
     screenupdater();
+
+
 
     if (lives == 0)
     {
@@ -662,11 +666,15 @@ void Game::Render()
 
     //set which camera to be used
     
-
     
     
-     m_DD->m_cam = m_firstpersoncam.get();
     
+     m_DD->m_cam = m_fpscam;
+    
+     if (m_DD->m_cam == nullptr)
+     {
+         printf("hi");
+     }
 
     //update the constant buffer for the rendering of VBGOs
     VBGO::UpdateConstantBuffer(m_DD);

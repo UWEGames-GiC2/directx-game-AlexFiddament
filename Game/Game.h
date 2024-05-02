@@ -133,7 +133,7 @@ private:
     //list<CMOGO*> m_PhysicsObjects
 
 
-    std::shared_ptr<firstpersoncam> m_FPScam = nullptr;
+    std::shared_ptr<firstpersoncam> m_fpscam;
 
     std::vector<std::shared_ptr<CMOGO>> m_ColliderObjects;
 
