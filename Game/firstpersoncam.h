@@ -9,7 +9,7 @@
 class firstpersoncam : public Camera
 {
 public:
-	firstpersoncam(float _fieldOfView, float _aspectRatio, float _nearPlaneDistance, float _farPlaneDistance, GameObject* _target, Vector3 _up, Vector3 _dpos);
+	firstpersoncam(float _fieldOfView, float _aspectRatio, float _nearPlaneDistance, float _farPlaneDistance, std::shared_ptr<GameObject> _target, Vector3 _up, Vector3 _dpos);
 	virtual ~firstpersoncam();
 
 	virtual void Tick(GameData* _GD) override;
@@ -19,7 +19,8 @@ public:
 	Matrix camrotatey;
 	Matrix camrotatex;
 protected:
-	GameObject* m_targetObject; //I'm following this object
+	std::shared_ptr<GameObject> m_targetObject;
+	
 	Vector3	m_dpos; //I'll lurk this far behind and away from it
 	
 };

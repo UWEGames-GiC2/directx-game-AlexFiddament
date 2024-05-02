@@ -2,13 +2,14 @@
 #include "firstpersoncam.h"
 #include "GameData.h"
 
-firstpersoncam::firstpersoncam(float _fieldOfView, float _aspectRatio, float _nearPlaneDistance, float _farPlaneDistance, GameObject* _target, Vector3 _up, Vector3 _dpos)
+firstpersoncam::firstpersoncam(float _fieldOfView, float _aspectRatio, float _nearPlaneDistance, float _farPlaneDistance, std::shared_ptr<GameObject> _target, Vector3 _up, Vector3 _dpos)
 	:Camera(_fieldOfView, _aspectRatio, _nearPlaneDistance, _farPlaneDistance, _up)
 {
 	m_targetObject = _target;
 	m_dpos = _dpos;
 	
-
+	m_camYaw = m_targetObject->GetYaw();
+	m_camPitch = m_targetObject->GetPitch();
 	
 }
 
