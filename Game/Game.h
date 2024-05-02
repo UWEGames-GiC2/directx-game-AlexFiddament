@@ -112,7 +112,9 @@ private:
     std::shared_ptr<Camera> m_cam = nullptr;
     
     std::shared_ptr<TPSCamera> m_TPScam = nullptr;
+
     std::shared_ptr<firstpersoncam> m_firstpersoncam = nullptr;
+
     Light* m_light = NULL; //base light
 
     //required for the CMO model rendering system
@@ -133,7 +135,7 @@ private:
     //list<CMOGO*> m_PhysicsObjects
 
 
-    std::shared_ptr<firstpersoncam> m_fpscam;
+   
 
     std::vector<std::shared_ptr<CMOGO>> m_ColliderObjects;
 

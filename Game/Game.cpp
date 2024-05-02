@@ -387,13 +387,12 @@ void Game::Initialize(HWND _window, int _width, int _height)
    //m_firstpersoncam = new firstpersoncam(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 0.0f, 0.0f));
 
    std::shared_ptr<firstpersoncam> m_fpscam = std::make_shared<firstpersoncam>(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 0.0f, 0.0f));
-
    m_GameObjects.push_back(m_fpscam);
 
   
 
-    
 
+       
    
     
     
@@ -408,7 +407,7 @@ void Game::Initialize(HWND _window, int _width, int _height)
     m_DD = new DrawData;
     m_DD->m_pd3dImmediateContext = nullptr;
     m_DD->m_states = m_states;
-    m_DD->m_cam = m_cam;
+    m_DD->m_cam = m_fpscam;
     m_DD->m_light = m_light;
 
     
@@ -669,7 +668,7 @@ void Game::Render()
     
     
     
-     m_DD->m_cam = m_fpscam;
+     
     
      if (m_DD->m_cam == nullptr)
      {
