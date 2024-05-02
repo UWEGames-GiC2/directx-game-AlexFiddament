@@ -110,7 +110,8 @@ private:
 
     //Basic 3D renderers
     std::shared_ptr<Camera> m_cam = nullptr;
-    TPSCamera* m_TPScam = NULL;//TPS cam
+    
+    std::shared_ptr<TPSCamera> m_TPScam = nullptr;
     std::shared_ptr<firstpersoncam> m_firstpersoncam = nullptr;
     Light* m_light = NULL; //base light
 

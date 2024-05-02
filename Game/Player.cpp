@@ -115,7 +115,6 @@ void Player::Tick(GameData* _GD)
 				if (!Projectiles[i]->isactive() )
 				{
 					
-					
 					Projectiles[i]->SetPos(this->GetPos());
 					Vector3 forwardMove = 40.0f * Vector3::Forward;
 					Matrix rotYaw = Matrix::CreateRotationY(this->GetYaw() + XMConvertToRadians(180));
@@ -127,6 +126,7 @@ void Player::Tick(GameData* _GD)
 					Projectiles[i]->SetDrag(0.01f);
 					Projectiles[i]->SetPhysicsOn(true);
 					Projectiles[i]->SetAcceleration(forwardMove * 1000.0f);
+					
 
 					
 

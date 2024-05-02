@@ -16,8 +16,9 @@ struct DrawData
 {
 	ID3D11DeviceContext* m_pd3dImmediateContext;
 	CommonStates* m_states;
-	std::shared_ptr<Camera> m_cam;
-	std::shared_ptr<Light> m_light;
+	
+	Camera* m_cam;
+	Light* m_light;
 
 };
 

@@ -409,8 +409,8 @@ void Game::Initialize(HWND _window, int _width, int _height)
     m_DD = new DrawData;
     m_DD->m_pd3dImmediateContext = nullptr;
     m_DD->m_states = m_states;
-    m_DD->m_cam = m_cam;
-    m_DD->m_light = m_light;
+    m_DD->m_cam = m_cam.get();
+    m_DD->m_light = m_light.get();
 
     
 }
@@ -647,6 +647,8 @@ void Game::Update(DX::StepTimer const& _timer)
 // Draws the scene.
 void Game::Render()
 {
+
+
     // Don't try to render anything before the first Update.
     if (m_timer.GetFrameCount() == 0)
     {
@@ -659,15 +661,17 @@ void Game::Render()
     m_DD->m_pd3dImmediateContext = m_d3dContext.Get();
 
     //set which camera to be used
-    m_DD->m_cam = m_cam;
+    
 
     
     
-     m_DD->m_cam = m_firstpersoncam;
+     m_DD->m_cam = m_firstpersoncam.get();
     
 
     //update the constant buffer for the rendering of VBGOs
     VBGO::UpdateConstantBuffer(m_DD);
+
+
 
     //Draw 3D Game Obejects
     for (std::list<std::shared_ptr<GameObject>>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
@@ -696,6 +700,7 @@ void Game::Render()
 
     //drawing text screws up the Depth Stencil State, this puts it back again!
     m_d3dContext->OMSetDepthStencilState(m_states->DepthDefault(), 0);
+
 
     if (m_GD->m_GS == GS_GAME_OVER)
     {
@@ -791,6 +796,7 @@ void Game::Render()
     
 
     Present();
+
 }
 
 // Helper method to clear the back buffers.
