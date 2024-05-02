@@ -585,6 +585,7 @@ void Game::Update(DX::StepTimer const& _timer)
                 m_ColliderObjects[i]->SetActive(true);
             }
 
+
             mover = 0;
             spawn = Vector3(0.0F, 30.0f, 50.0f);
 
